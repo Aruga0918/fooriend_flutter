@@ -39,7 +39,7 @@ class HomeCommunitiesController extends StateNotifier<HomeCommunitiesState> with
   _toJson({required String communityName}) {
     return jsonEncode({"communityName": communityName, "communityId": "0"});
   }
-
+//NOTE: 選択されたコミュニティ名をpreferenceに保存する
   void selectCommunity(String communityName) {
     homeStore.selectCommunity(_toJson(communityName: communityName));
     state = state.copyWith(selectedCommunity: communityName);
