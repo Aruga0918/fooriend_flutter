@@ -2,15 +2,20 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/ranking.dart';
 
 class RankingRepository {
   final Dio dio;
+  final int shopId;
 
-  const RankingRepository({required this.dio});
+  const RankingRepository({
+    required this.dio,
+    required this.shopId
+  });
 
-  Future<String> menuRanking() async{
+  Future<List<Ranking>> menuRanking() async{
     final response = await dio.get(
-        '/rankings/shops/:shop_id',
+        '/rankings/shops/$shopId',
     //NOTE:
       //n_cntが指定されなかったときは3位まで取得
       //community idが指定されなかった時は全部の投稿を用いたランキングを作成
@@ -19,8 +24,9 @@ class RankingRepository {
       // 'community/id': int
     // }
     );
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final List<Ranking> rankingList = [];
+    response.data.forEach((data) => rankingList.add(Ranking.fromJson(data)));
+    return rankingList;
   }
   //[
 //     {

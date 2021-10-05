@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooriend/widgets/screens/shop/children/tab_menu.dart';
 import 'package:fooriend/widgets/screens/shop/children/tab_post.dart';
-import 'package:fooriend/widgets/screens/shop/children/tab_ranking.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
