@@ -24,8 +24,12 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/food_wes.png');
   AssetGenImage get home => const AssetGenImage('assets/images/home.png');
   AssetGenImage get search => const AssetGenImage('assets/images/search.png');
+  AssetGenImage get shopAddress =>
+      const AssetGenImage('assets/images/shop_address.png');
   AssetGenImage get shopIcon =>
       const AssetGenImage('assets/images/shop_icon.png');
+  AssetGenImage get shopTime =>
+      const AssetGenImage('assets/images/shop_time.png');
   AssetGenImage get user => const AssetGenImage('assets/images/user.png');
   AssetGenImage get userSample =>
       const AssetGenImage('assets/images/user_sample.jpg');

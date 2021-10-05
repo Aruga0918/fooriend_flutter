@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/community.dart';
 
 //NOTE: ログインユーザーに関与するものは全てアクセストークンによりuserIdを取得する
 class CommunityRepository {
@@ -9,10 +10,9 @@ class CommunityRepository {
 
   const CommunityRepository({required this.dio});
 
-  Future<String> getCommunity({required int communityId}) async {
+  Future<Community> getCommunity({required int communityId}) async {
     final response = await dio.get('/communities/$communityId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    return Community.fromJson(response);
   }
 
 //NOTE
@@ -31,6 +31,7 @@ class CommunityRepository {
 //     "comm_icon_url" : コミュニティアイコンのurl,
 //     "description" : コミュニティの説明,
 //     "host_user" : hostのuser id(unsigned int)
+
   Future<String> createCommunity({
   required String communityName,
   required String description,
