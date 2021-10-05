@@ -16,9 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HomeCommunitiesStateTearOff {
   const _$HomeCommunitiesStateTearOff();
 
-  _HomeCommunitiesState call({String selectedCommunity = ""}) {
+  _HomeCommunitiesState call(
+      {String selectedCommunityName = "",
+      String selectedCommunityIconUrl = ""}) {
     return _HomeCommunitiesState(
-      selectedCommunity: selectedCommunity,
+      selectedCommunityName: selectedCommunityName,
+      selectedCommunityIconUrl: selectedCommunityIconUrl,
     );
   }
 }
@@ -28,7 +31,8 @@ const $HomeCommunitiesState = _$HomeCommunitiesStateTearOff();
 
 /// @nodoc
 mixin _$HomeCommunitiesState {
-  String get selectedCommunity => throw _privateConstructorUsedError;
+  String get selectedCommunityName => throw _privateConstructorUsedError;
+  String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeCommunitiesStateCopyWith<HomeCommunitiesState> get copyWith =>
@@ -40,7 +44,7 @@ abstract class $HomeCommunitiesStateCopyWith<$Res> {
   factory $HomeCommunitiesStateCopyWith(HomeCommunitiesState value,
           $Res Function(HomeCommunitiesState) then) =
       _$HomeCommunitiesStateCopyWithImpl<$Res>;
-  $Res call({String selectedCommunity});
+  $Res call({String selectedCommunityName, String selectedCommunityIconUrl});
 }
 
 /// @nodoc
@@ -54,12 +58,17 @@ class _$HomeCommunitiesStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? selectedCommunity = freezed,
+    Object? selectedCommunityName = freezed,
+    Object? selectedCommunityIconUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      selectedCommunity: selectedCommunity == freezed
-          ? _value.selectedCommunity
-          : selectedCommunity // ignore: cast_nullable_to_non_nullable
+      selectedCommunityName: selectedCommunityName == freezed
+          ? _value.selectedCommunityName
+          : selectedCommunityName // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedCommunityIconUrl: selectedCommunityIconUrl == freezed
+          ? _value.selectedCommunityIconUrl
+          : selectedCommunityIconUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -72,7 +81,7 @@ abstract class _$HomeCommunitiesStateCopyWith<$Res>
           $Res Function(_HomeCommunitiesState) then) =
       __$HomeCommunitiesStateCopyWithImpl<$Res>;
   @override
-  $Res call({String selectedCommunity});
+  $Res call({String selectedCommunityName, String selectedCommunityIconUrl});
 }
 
 /// @nodoc
@@ -88,12 +97,17 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? selectedCommunity = freezed,
+    Object? selectedCommunityName = freezed,
+    Object? selectedCommunityIconUrl = freezed,
   }) {
     return _then(_HomeCommunitiesState(
-      selectedCommunity: selectedCommunity == freezed
-          ? _value.selectedCommunity
-          : selectedCommunity // ignore: cast_nullable_to_non_nullable
+      selectedCommunityName: selectedCommunityName == freezed
+          ? _value.selectedCommunityName
+          : selectedCommunityName // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedCommunityIconUrl: selectedCommunityIconUrl == freezed
+          ? _value.selectedCommunityIconUrl
+          : selectedCommunityIconUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -102,30 +116,39 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomeCommunitiesState implements _HomeCommunitiesState {
-  const _$_HomeCommunitiesState({this.selectedCommunity = ""});
+  const _$_HomeCommunitiesState(
+      {this.selectedCommunityName = "", this.selectedCommunityIconUrl = ""});
 
   @JsonKey(defaultValue: "")
   @override
-  final String selectedCommunity;
+  final String selectedCommunityName;
+  @JsonKey(defaultValue: "")
+  @override
+  final String selectedCommunityIconUrl;
 
   @override
   String toString() {
-    return 'HomeCommunitiesState(selectedCommunity: $selectedCommunity)';
+    return 'HomeCommunitiesState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _HomeCommunitiesState &&
-            (identical(other.selectedCommunity, selectedCommunity) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedCommunity, selectedCommunity)));
+            (identical(other.selectedCommunityName, selectedCommunityName) ||
+                const DeepCollectionEquality().equals(
+                    other.selectedCommunityName, selectedCommunityName)) &&
+            (identical(
+                    other.selectedCommunityIconUrl, selectedCommunityIconUrl) ||
+                const DeepCollectionEquality().equals(
+                    other.selectedCommunityIconUrl, selectedCommunityIconUrl)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(selectedCommunity);
+      const DeepCollectionEquality().hash(selectedCommunityName) ^
+      const DeepCollectionEquality().hash(selectedCommunityIconUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -135,11 +158,14 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
 }
 
 abstract class _HomeCommunitiesState implements HomeCommunitiesState {
-  const factory _HomeCommunitiesState({String selectedCommunity}) =
-      _$_HomeCommunitiesState;
+  const factory _HomeCommunitiesState(
+      {String selectedCommunityName,
+      String selectedCommunityIconUrl}) = _$_HomeCommunitiesState;
 
   @override
-  String get selectedCommunity => throw _privateConstructorUsedError;
+  String get selectedCommunityName => throw _privateConstructorUsedError;
+  @override
+  String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HomeCommunitiesStateCopyWith<_HomeCommunitiesState> get copyWith =>

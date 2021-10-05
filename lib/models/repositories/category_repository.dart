@@ -2,16 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/category_shop.dart';
 
 class CategoryRepository {
   final Dio dio;
 
   const CategoryRepository({required this.dio});
 
-  Future<String> getCategories() async{
+  Future<List<dynamic>> getCategories() async{
     final response = await dio.get('/categories');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final json = response.data;
+    final List<dynamic> categoryList = [];
+    json.forEach((data) => categoryList.add(data));
+    return categoryList;
   }
   //[
 //     {
@@ -21,7 +24,7 @@ class CategoryRepository {
 //     }
 // ]
 
-  Future<String> getCategoryShops({required int categoryId}) async{
+  Future<List<CategoryShop>> getCategoryShops({required int categoryId}) async{
     final response = await dio.get(
         '/categories/$categoryId/shops',
         //NOTE: community_id (int) を指定すると投稿数を表示、指定なしは全体数
@@ -29,8 +32,9 @@ class CategoryRepository {
     //   'option1': hoge
     // }
     );
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final List<CategoryShop> dataList = [];
+    response.data.forEach((data) => dataList.add(CategoryShop.fromJson(data)));
+    return dataList;
   }
   //[
 //     {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fooriend/models/entities/community.dart';
 import 'package:fooriend/models/stores/home_store.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +11,8 @@ part 'home_communities_state.freezed.dart';
 @freezed
 class HomeCommunitiesState with _$HomeCommunitiesState {
   const factory HomeCommunitiesState({
-    @Default("") String selectedCommunity,
+    @Default("") String selectedCommunityName,
+    @Default("") String selectedCommunityIconUrl
 }) = _HomeCommunitiesState;
 }
 
@@ -36,12 +38,15 @@ class HomeCommunitiesController extends StateNotifier<HomeCommunitiesState> with
     final data = jsonDecode(communityData);
   }
 
-  _toJson({required String communityName}) {
-    return jsonEncode({"communityName": communityName, "communityId": "0"});
+  _toJson({required String communityName, required String commIconUrl}) {
+    return jsonEncode({"communityName": communityName, "commIconUrl": commIconUrl});
   }
 //NOTE: 選択されたコミュニティ名をpreferenceに保存する
-  void selectCommunity(String communityName) {
-    homeStore.selectCommunity(_toJson(communityName: communityName));
-    state = state.copyWith(selectedCommunity: communityName);
+  void selectCommunity(Community selectedCommunity) {
+    homeStore.selectCommunity(Community.toJson(community: selectedCommunity));
+    state = state.copyWith(
+      selectedCommunityName: selectedCommunity.name,
+      selectedCommunityIconUrl: selectedCommunity.commIconUrl
+    );
   }
 }
