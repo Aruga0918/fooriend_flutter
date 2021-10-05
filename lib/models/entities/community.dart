@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:fooriend/utils/const.dart';
 import 'package:fooriend/utils/mock_constant.dart';
 
 class Community {

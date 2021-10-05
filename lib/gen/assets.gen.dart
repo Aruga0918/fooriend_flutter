@@ -23,6 +23,12 @@ class $AssetsImagesGen {
   AssetGenImage get foodWes =>
       const AssetGenImage('assets/images/food_wes.png');
   AssetGenImage get home => const AssetGenImage('assets/images/home.png');
+  AssetGenImage get ranking1 =>
+      const AssetGenImage('assets/images/ranking-1.png');
+  AssetGenImage get ranking2 =>
+      const AssetGenImage('assets/images/ranking-2.png');
+  AssetGenImage get ranking3 =>
+      const AssetGenImage('assets/images/ranking-3.png');
   AssetGenImage get search => const AssetGenImage('assets/images/search.png');
   AssetGenImage get shopAddress =>
       const AssetGenImage('assets/images/shop_address.png');
