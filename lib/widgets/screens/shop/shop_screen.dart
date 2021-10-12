@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fooriend/models/entities/category_shop.dart';
-import 'package:fooriend/widgets/screens/shop/children/tab_menu.dart';
-import 'package:fooriend/widgets/screens/shop/children/tab_post.dart';
 import 'package:fooriend/widgets/screens/shop/shop_screen_tabview.dart';
 import 'package:fooriend/widgets/screens/shop/shop_screen_upper.dart';
+import 'package:fooriend/widgets/screens/shop/tabs/menu_tab.dart';
+import 'package:fooriend/widgets/screens/shop/tabs/post_tab.dart';
 import 'package:fooriend/widgets/screens/shop/tabs/ranking_tab.dart';
 
 class ShopScreen extends StatelessWidget {
@@ -35,8 +35,8 @@ class ShopScreen extends StatelessWidget {
         tabBarView: TabBarView(
           children: [
             RankingTab(shopId: categoryShop.id),
-            MenuTab(),
-            PostTab(),
+            MenuTab(shopId: categoryShop.id),
+            PostTab(shopId: categoryShop.id),
           ],
         ),
       ),
