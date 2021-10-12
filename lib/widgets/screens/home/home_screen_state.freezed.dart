@@ -17,13 +17,15 @@ class _$HomeScreenStateTearOff {
   const _$HomeScreenStateTearOff();
 
   _HomeScreenState call(
-      {String selectedCommunityName = "",
+      {String selectedCommunityName = "パブリック",
       String selectedCommunityIconUrl = MockConstant.ACommunityImage,
-      List<Community> belongCommunities = const []}) {
+      List<UserCommunity> belongCommunities = const [],
+      bool isLogin = false}) {
     return _HomeScreenState(
       selectedCommunityName: selectedCommunityName,
       selectedCommunityIconUrl: selectedCommunityIconUrl,
       belongCommunities: belongCommunities,
+      isLogin: isLogin,
     );
   }
 }
@@ -35,7 +37,9 @@ const $HomeScreenState = _$HomeScreenStateTearOff();
 mixin _$HomeScreenState {
   String get selectedCommunityName => throw _privateConstructorUsedError;
   String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
-  List<Community> get belongCommunities => throw _privateConstructorUsedError;
+  List<UserCommunity> get belongCommunities =>
+      throw _privateConstructorUsedError;
+  bool get isLogin => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeScreenStateCopyWith<HomeScreenState> get copyWith =>
@@ -50,7 +54,8 @@ abstract class $HomeScreenStateCopyWith<$Res> {
   $Res call(
       {String selectedCommunityName,
       String selectedCommunityIconUrl,
-      List<Community> belongCommunities});
+      List<UserCommunity> belongCommunities,
+      bool isLogin});
 }
 
 /// @nodoc
@@ -67,6 +72,7 @@ class _$HomeScreenStateCopyWithImpl<$Res>
     Object? selectedCommunityName = freezed,
     Object? selectedCommunityIconUrl = freezed,
     Object? belongCommunities = freezed,
+    Object? isLogin = freezed,
   }) {
     return _then(_value.copyWith(
       selectedCommunityName: selectedCommunityName == freezed
@@ -80,7 +86,11 @@ class _$HomeScreenStateCopyWithImpl<$Res>
       belongCommunities: belongCommunities == freezed
           ? _value.belongCommunities
           : belongCommunities // ignore: cast_nullable_to_non_nullable
-              as List<Community>,
+              as List<UserCommunity>,
+      isLogin: isLogin == freezed
+          ? _value.isLogin
+          : isLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -95,7 +105,8 @@ abstract class _$HomeScreenStateCopyWith<$Res>
   $Res call(
       {String selectedCommunityName,
       String selectedCommunityIconUrl,
-      List<Community> belongCommunities});
+      List<UserCommunity> belongCommunities,
+      bool isLogin});
 }
 
 /// @nodoc
@@ -114,6 +125,7 @@ class __$HomeScreenStateCopyWithImpl<$Res>
     Object? selectedCommunityName = freezed,
     Object? selectedCommunityIconUrl = freezed,
     Object? belongCommunities = freezed,
+    Object? isLogin = freezed,
   }) {
     return _then(_HomeScreenState(
       selectedCommunityName: selectedCommunityName == freezed
@@ -127,7 +139,11 @@ class __$HomeScreenStateCopyWithImpl<$Res>
       belongCommunities: belongCommunities == freezed
           ? _value.belongCommunities
           : belongCommunities // ignore: cast_nullable_to_non_nullable
-              as List<Community>,
+              as List<UserCommunity>,
+      isLogin: isLogin == freezed
+          ? _value.isLogin
+          : isLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -136,11 +152,12 @@ class __$HomeScreenStateCopyWithImpl<$Res>
 
 class _$_HomeScreenState implements _HomeScreenState {
   const _$_HomeScreenState(
-      {this.selectedCommunityName = "",
+      {this.selectedCommunityName = "パブリック",
       this.selectedCommunityIconUrl = MockConstant.ACommunityImage,
-      this.belongCommunities = const []});
+      this.belongCommunities = const [],
+      this.isLogin = false});
 
-  @JsonKey(defaultValue: "")
+  @JsonKey(defaultValue: "パブリック")
   @override
   final String selectedCommunityName;
   @JsonKey(defaultValue: MockConstant.ACommunityImage)
@@ -148,11 +165,14 @@ class _$_HomeScreenState implements _HomeScreenState {
   final String selectedCommunityIconUrl;
   @JsonKey(defaultValue: const [])
   @override
-  final List<Community> belongCommunities;
+  final List<UserCommunity> belongCommunities;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isLogin;
 
   @override
   String toString() {
-    return 'HomeScreenState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl, belongCommunities: $belongCommunities)';
+    return 'HomeScreenState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl, belongCommunities: $belongCommunities, isLogin: $isLogin)';
   }
 
   @override
@@ -169,7 +189,9 @@ class _$_HomeScreenState implements _HomeScreenState {
                     selectedCommunityIconUrl)) &&
             (identical(other.belongCommunities, belongCommunities) ||
                 const DeepCollectionEquality()
-                    .equals(other.belongCommunities, belongCommunities)));
+                    .equals(other.belongCommunities, belongCommunities)) &&
+            (identical(other.isLogin, isLogin) ||
+                const DeepCollectionEquality().equals(other.isLogin, isLogin)));
   }
 
   @override
@@ -177,7 +199,8 @@ class _$_HomeScreenState implements _HomeScreenState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(selectedCommunityName) ^
       const DeepCollectionEquality().hash(selectedCommunityIconUrl) ^
-      const DeepCollectionEquality().hash(belongCommunities);
+      const DeepCollectionEquality().hash(belongCommunities) ^
+      const DeepCollectionEquality().hash(isLogin);
 
   @JsonKey(ignore: true)
   @override
@@ -189,14 +212,18 @@ abstract class _HomeScreenState implements HomeScreenState {
   const factory _HomeScreenState(
       {String selectedCommunityName,
       String selectedCommunityIconUrl,
-      List<Community> belongCommunities}) = _$_HomeScreenState;
+      List<UserCommunity> belongCommunities,
+      bool isLogin}) = _$_HomeScreenState;
 
   @override
   String get selectedCommunityName => throw _privateConstructorUsedError;
   @override
   String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
   @override
-  List<Community> get belongCommunities => throw _privateConstructorUsedError;
+  List<UserCommunity> get belongCommunities =>
+      throw _privateConstructorUsedError;
+  @override
+  bool get isLogin => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HomeScreenStateCopyWith<_HomeScreenState> get copyWith =>

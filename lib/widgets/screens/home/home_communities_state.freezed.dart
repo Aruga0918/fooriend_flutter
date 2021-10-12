@@ -18,10 +18,14 @@ class _$HomeCommunitiesStateTearOff {
 
   _HomeCommunitiesState call(
       {String selectedCommunityName = "",
-      String selectedCommunityIconUrl = ""}) {
+      String selectedCommunityIconUrl = "",
+      List<UserCommunity> belongingCommunities = const [],
+      bool isLogin = false}) {
     return _HomeCommunitiesState(
       selectedCommunityName: selectedCommunityName,
       selectedCommunityIconUrl: selectedCommunityIconUrl,
+      belongingCommunities: belongingCommunities,
+      isLogin: isLogin,
     );
   }
 }
@@ -33,6 +37,9 @@ const $HomeCommunitiesState = _$HomeCommunitiesStateTearOff();
 mixin _$HomeCommunitiesState {
   String get selectedCommunityName => throw _privateConstructorUsedError;
   String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
+  List<UserCommunity> get belongingCommunities =>
+      throw _privateConstructorUsedError;
+  bool get isLogin => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeCommunitiesStateCopyWith<HomeCommunitiesState> get copyWith =>
@@ -44,7 +51,11 @@ abstract class $HomeCommunitiesStateCopyWith<$Res> {
   factory $HomeCommunitiesStateCopyWith(HomeCommunitiesState value,
           $Res Function(HomeCommunitiesState) then) =
       _$HomeCommunitiesStateCopyWithImpl<$Res>;
-  $Res call({String selectedCommunityName, String selectedCommunityIconUrl});
+  $Res call(
+      {String selectedCommunityName,
+      String selectedCommunityIconUrl,
+      List<UserCommunity> belongingCommunities,
+      bool isLogin});
 }
 
 /// @nodoc
@@ -60,6 +71,8 @@ class _$HomeCommunitiesStateCopyWithImpl<$Res>
   $Res call({
     Object? selectedCommunityName = freezed,
     Object? selectedCommunityIconUrl = freezed,
+    Object? belongingCommunities = freezed,
+    Object? isLogin = freezed,
   }) {
     return _then(_value.copyWith(
       selectedCommunityName: selectedCommunityName == freezed
@@ -70,6 +83,14 @@ class _$HomeCommunitiesStateCopyWithImpl<$Res>
           ? _value.selectedCommunityIconUrl
           : selectedCommunityIconUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      belongingCommunities: belongingCommunities == freezed
+          ? _value.belongingCommunities
+          : belongingCommunities // ignore: cast_nullable_to_non_nullable
+              as List<UserCommunity>,
+      isLogin: isLogin == freezed
+          ? _value.isLogin
+          : isLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -81,7 +102,11 @@ abstract class _$HomeCommunitiesStateCopyWith<$Res>
           $Res Function(_HomeCommunitiesState) then) =
       __$HomeCommunitiesStateCopyWithImpl<$Res>;
   @override
-  $Res call({String selectedCommunityName, String selectedCommunityIconUrl});
+  $Res call(
+      {String selectedCommunityName,
+      String selectedCommunityIconUrl,
+      List<UserCommunity> belongingCommunities,
+      bool isLogin});
 }
 
 /// @nodoc
@@ -99,6 +124,8 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
   $Res call({
     Object? selectedCommunityName = freezed,
     Object? selectedCommunityIconUrl = freezed,
+    Object? belongingCommunities = freezed,
+    Object? isLogin = freezed,
   }) {
     return _then(_HomeCommunitiesState(
       selectedCommunityName: selectedCommunityName == freezed
@@ -109,6 +136,14 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
           ? _value.selectedCommunityIconUrl
           : selectedCommunityIconUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      belongingCommunities: belongingCommunities == freezed
+          ? _value.belongingCommunities
+          : belongingCommunities // ignore: cast_nullable_to_non_nullable
+              as List<UserCommunity>,
+      isLogin: isLogin == freezed
+          ? _value.isLogin
+          : isLogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -117,7 +152,10 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
 
 class _$_HomeCommunitiesState implements _HomeCommunitiesState {
   const _$_HomeCommunitiesState(
-      {this.selectedCommunityName = "", this.selectedCommunityIconUrl = ""});
+      {this.selectedCommunityName = "",
+      this.selectedCommunityIconUrl = "",
+      this.belongingCommunities = const [],
+      this.isLogin = false});
 
   @JsonKey(defaultValue: "")
   @override
@@ -125,10 +163,16 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
   @JsonKey(defaultValue: "")
   @override
   final String selectedCommunityIconUrl;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<UserCommunity> belongingCommunities;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isLogin;
 
   @override
   String toString() {
-    return 'HomeCommunitiesState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl)';
+    return 'HomeCommunitiesState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl, belongingCommunities: $belongingCommunities, isLogin: $isLogin)';
   }
 
   @override
@@ -141,14 +185,22 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
             (identical(
                     other.selectedCommunityIconUrl, selectedCommunityIconUrl) ||
                 const DeepCollectionEquality().equals(
-                    other.selectedCommunityIconUrl, selectedCommunityIconUrl)));
+                    other.selectedCommunityIconUrl,
+                    selectedCommunityIconUrl)) &&
+            (identical(other.belongingCommunities, belongingCommunities) ||
+                const DeepCollectionEquality().equals(
+                    other.belongingCommunities, belongingCommunities)) &&
+            (identical(other.isLogin, isLogin) ||
+                const DeepCollectionEquality().equals(other.isLogin, isLogin)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(selectedCommunityName) ^
-      const DeepCollectionEquality().hash(selectedCommunityIconUrl);
+      const DeepCollectionEquality().hash(selectedCommunityIconUrl) ^
+      const DeepCollectionEquality().hash(belongingCommunities) ^
+      const DeepCollectionEquality().hash(isLogin);
 
   @JsonKey(ignore: true)
   @override
@@ -160,12 +212,19 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
 abstract class _HomeCommunitiesState implements HomeCommunitiesState {
   const factory _HomeCommunitiesState(
       {String selectedCommunityName,
-      String selectedCommunityIconUrl}) = _$_HomeCommunitiesState;
+      String selectedCommunityIconUrl,
+      List<UserCommunity> belongingCommunities,
+      bool isLogin}) = _$_HomeCommunitiesState;
 
   @override
   String get selectedCommunityName => throw _privateConstructorUsedError;
   @override
   String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
+  @override
+  List<UserCommunity> get belongingCommunities =>
+      throw _privateConstructorUsedError;
+  @override
+  bool get isLogin => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HomeCommunitiesStateCopyWith<_HomeCommunitiesState> get copyWith =>

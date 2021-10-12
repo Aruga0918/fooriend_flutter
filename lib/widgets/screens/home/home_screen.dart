@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:fooriend/models/entities/community.dart';
+import 'package:fooriend/models/entities/user_community.dart';
 import 'package:fooriend/models/stores/home_store.dart';
 import 'package:fooriend/utils/mock_constant.dart';
 import 'package:fooriend/widgets/screens/home/children/community_circle.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return StateNotifierProvider<HomeScreenController, HomeScreenState>(
@@ -21,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, _) {
         final selectedName = context.select<HomeScreenState, String>((state) => state.selectedCommunityName);
         final selectedCommunityIconUrl = context.select<HomeScreenState, String>((state) => state.selectedCommunityIconUrl);
-        final belongCommunities = context.select<HomeScreenState, List<Community>>((state) => state.belongCommunities);
+        final belongCommunities = context.select<HomeScreenState, List<UserCommunity>>((state) => state.belongCommunities);
         final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
         return Scaffold(
               key: _key,
@@ -72,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               body: Column(
                 children: [
                   DisplayBar(selectedName: selectedName),
-                  Expanded(child: HomeTimeline())
+                  Expanded(child: HomeTimeLine(communityId: 0,))
                 ],
               ),
             );

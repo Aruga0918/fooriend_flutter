@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/user_community.dart';
 
 class UserRepository {
   final Dio dio;
@@ -51,10 +52,11 @@ class UserRepository {
     await dio.patch('/users/edit');
   }
 
-  Future<String> getUserCommunities() async{
+  Future<List<UserCommunity>> getUserCommunities() async{
     final response = await dio.get('/users/communities');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final List<UserCommunity> communityList = [];
+    response.data.forEach((data) => communityList.add(UserCommunity.fromJson(data)));
+    return communityList;
     //[
     //     {
     //         "id" : コミュニティのid

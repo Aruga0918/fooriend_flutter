@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:fooriend/models/entities/community.dart';
+import 'package:fooriend/models/entities/user_community.dart';
 import 'package:fooriend/models/stores/home_store.dart';
 import 'package:fooriend/utils/mock_constant.dart';
 import 'package:fooriend/widgets/screens/home/children/drawer_listtile.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'children/community_circle.dart';
 
 class CommunityBar extends StatelessWidget {
-  final List<Community> userCommunity;
+  final List<UserCommunity> userCommunity;
   const CommunityBar({
     Key? key,
     required this.userCommunity,
@@ -31,7 +32,7 @@ class CommunityBar extends StatelessWidget {
             return InkWell(
               child: DrawerListTile(
                 communityName: userCommunity[index].name,
-                communityImageUrl: userCommunity[index].commIconUrl,
+                communityImageUrl: userCommunity[index].iconUrl,
               ),
               onTap: () => context
                   .read<HomeCommunitiesController>()
