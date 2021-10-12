@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/post.dart';
 
 class PostRepository {
   final Dio dio;
 
   const PostRepository({required this.dio});
 
-  Future<String> getPost({required String postId}) async{
+  Future<Post> getPost({required String postId}) async{
     final response = await dio.get('/posts/$postId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    return Post.fromJson(response);
   }
   //{
 //     "post_id" : 投稿のid,
@@ -34,10 +34,11 @@ class PostRepository {
 //     "created_at" : 投稿時間
 // }
 
-  Future<String> getUserPost({required int userId}) async{
+  Future<List<Post>> getUserPost({required int userId}) async{
     final response = await dio.get('/posts/users/$userId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final List<Post> postList = [];
+    response.data.forEach((data) => postList.add(Post.fromJson(data)));
+    return postList;
   }
   //[
 //     {
@@ -63,10 +64,11 @@ class PostRepository {
 //     ...
 // ]
 
-  Future<String> getShopPost({required int shopId}) async{
+  Future<List<Post>> getShopPost({required int shopId}) async{
     final response = await dio.get('/posts/shops/$shopId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final List<Post> postList = [];
+    response.data.forEach((data) => postList.add(Post.fromJson(data)));
+    return postList;
   }
   //[
 //     {
@@ -92,10 +94,11 @@ class PostRepository {
 //     ...
 // ]
 
-  Future<String> getCommunityPost({required int communityId}) async{
+  Future<List<Post>> getCommunityPost({required int communityId}) async{
     final response = await dio.get('/posts/communities/$communityId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    final List<Post> postList = [];
+    response.data.forEach((data) => postList.add(Post.fromJson(data)));
+    return postList;
   }
   //[
 //     {
@@ -124,22 +127,26 @@ class PostRepository {
   Future<void> createPost({
     required int userId,
     required int shopId,
-    required List<int> menus,
+    required List<dynamic> menu,
     required String message,
   }) async{
      await dio.post(
         '/posts/users/$userId/shops/$shopId', queryParameters: {
-          'menus': menus,
+          'menu': menu,
           'message': message,
     });
   }
 
   Future<void> editPost({
     required int postId,
-    required List<int> menu,
+    required List<dynamic> menu,
     required String message,
   }) async{
-    await dio.patch('/posts/$postId');
+    await dio.patch('/posts/$postId', queryParameters: {
+      'menus': menu,
+      'message': message,
+    }
+    );
   }
 
   Future<void> deletePost({required int postId}) async{

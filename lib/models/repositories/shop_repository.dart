@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/shop.dart';
 
 class ShopRepository {
   final Dio dio;
 
   const ShopRepository({required this.dio});
 
-  Future<String> getShopData({required String shopId}) async{
+  Future<Shop> getShopData({required int shopId}) async{
     final response = await dio.get('/shops/$shopId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    return Shop.fromJson(response);
   }
   //{
 //     "id" : shop_id
