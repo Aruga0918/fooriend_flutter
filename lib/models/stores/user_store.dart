@@ -1,4 +1,5 @@
 
+
 import 'package:fooriend/models/entities/token.dart';
 import 'package:fooriend/models/entities/user.dart';
 import 'package:rxdart/rxdart.dart';
@@ -33,6 +34,7 @@ class UserStore {
   void setToken({required Token token}) async{
     await preference.setString(key: PreferenceKey.accessToken, value: token.accessToken);
     await preference.setString(key: PreferenceKey.refreshToken, value: token.refreshToken);
+    await preference.setString(key: PreferenceKey.tokenData, value: Token.toJson(token: token));
     _loadToken();
   }
 
@@ -52,9 +54,9 @@ class UserStore {
   void logOut() async{
     final jsonToken = tokenData.value;
     final jsonUser = userData.value;
-    await preference.removeString(key: PreferenceKey.tokenData, value: jsonToken);
+    await preference.clearString(key: PreferenceKey.tokenData);
     tokenData.sink.add("");
-    await preference.removeString(key: PreferenceKey.userData, value: jsonUser);
+    await preference.clearString(key: PreferenceKey.userData);
     userData.sink.add("");
   }
 }

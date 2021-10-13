@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fooriend/models/preference/preference.dart';
+import 'package:fooriend/models/stores/user_store.dart';
 import 'package:fooriend/widgets/screens/root/root_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ void main() async{
     systemNavigationBarColor: Colors.black,
   ));
   HomeStore().inject(Preference());
+  UserStore().inject(Preference());
   runApp(MyApp());
 }
 

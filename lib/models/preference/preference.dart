@@ -87,4 +87,9 @@ class Preference {
     list.remove(value);
     await preference.setStringList(EnumToString.convertToString(key), list);
   }
+
+  Future<void> clearString({required PreferenceKey key}) async{
+    final preference = await SharedPreferences.getInstance();
+    await preference.setString(EnumToString.convertToString(key), "");
+  }
 }

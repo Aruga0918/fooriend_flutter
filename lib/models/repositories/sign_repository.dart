@@ -8,22 +8,24 @@ class SignRepository {
 
   const SignRepository({required this.dio});
 
-  Future<void> signUp({required String userName, required String userId, required String password}) async{
-    await dio.post(
-        '/auth/signup', queryParameters: {
-      "username": userName,
-      "user_id": userId,
-      "password": password,
+  Future<Token> signUp({required String userName, required String uid, required String password}) async{
+    final response = await dio.post(
+        '/auth/signup', data: {
+      'username': userName,
+      'uid': uid,
+      'password': password,
     });
+    final token = Token.fromJson(response.data);
+    return token;
   }
 
-  Future<Token> signing({required String userId, required String password}) async{
+  Future<Token> signing({required String uid, required String password}) async{
     final response = await dio.post(
-        '/auth/signin', queryParameters: {
-      "user_id": userId,
+        '/auth/signin', data: {
+      "uid": uid,
       "password": password,
     });
-    final token = Token.fromJson(response);
+    final token = Token.fromJson(response.data);
     return token;
   }
 }
