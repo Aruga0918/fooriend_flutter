@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:fooriend/components/sigin_in_button.dart';
 import 'package:fooriend/models/entities/community.dart';
 import 'package:fooriend/models/entities/user_community.dart';
 import 'package:fooriend/models/stores/home_store.dart';
@@ -56,14 +57,20 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(8,50,0,0),
-                        child: Text(
-                          "コミュニティ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 26,
-                              color: Colors.white
-                          ),
+                        padding: const EdgeInsets.fromLTRB(8,50,8,0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "コミュニティ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 26,
+                                  color: Colors.white
+                              ),
+                            ),
+                            SignInButton()
+                          ],
                         ),
                       ),
                       CommunityBar(userCommunity: belongCommunities),

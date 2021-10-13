@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/token.dart';
 
 class SignRepository {
   final Dio dio;
@@ -16,11 +17,13 @@ class SignRepository {
     });
   }
 
-  Future<void> signing({required String userId, required String password}) async{
-    await dio.post(
+  Future<Token> signing({required String userId, required String password}) async{
+    final response = await dio.post(
         '/auth/signin', queryParameters: {
       "user_id": userId,
       "password": password,
     });
+    final token = Token.fromJson(response);
+    return token;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fooriend/widgets/screens/sign/sign_in.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -7,13 +8,7 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
-          CupertinoSearchTextField(),
-          Material(child: TextField())
-        ],
-      ),
-    );
+      child: SignInScreen()
+      );
   }
 }
