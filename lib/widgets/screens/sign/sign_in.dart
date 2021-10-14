@@ -23,10 +23,6 @@ class SignInScreen extends StatelessWidget {
         final _passwordController = context.read<SignInScreenController>().passwordController;
         final _isSingUp = context.select<SignInScreenState, bool>((state) => state.isSignUp);
           return Scaffold(
-            appBar: AppBar(
-              title: Text("ログイン"),
-              actions: [LogOutButton(logOut: () => context.read<SignInScreenController>().logOut())],
-            ),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
