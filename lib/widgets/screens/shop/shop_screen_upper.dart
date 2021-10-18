@@ -46,11 +46,7 @@ class ShopScreenUpper extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image(
-                    image: Assets.images.shopTime,
-                    height: 24,
-                    width: 24,
-                  ),
+                  child: Icon(Icons.access_time, color: Colors.grey),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.85,
@@ -66,11 +62,7 @@ class ShopScreenUpper extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image(
-                   image: Assets.images.shopAddress,
-                   height: 24,
-                   width: 24,
-                  ),
+                  child: Icon(Icons.map_outlined, color: Colors.grey)
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.85,

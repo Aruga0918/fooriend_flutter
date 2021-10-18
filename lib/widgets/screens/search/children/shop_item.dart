@@ -27,14 +27,14 @@ class ShopItem extends StatelessWidget {
         children: [
           Image.network(
             categoryShop.iconUrl,
-            height: MediaQuery.of(context).size.width * 0.25,
-            width: MediaQuery.of(context).size.width * 0.25,
+            height: MediaQuery.of(context).size.width * 0.225,
+            width: MediaQuery.of(context).size.width * 0.225,
             errorBuilder: (c, o, s) {
               print('Load failed : ${c.toString()}');
               return Image.network(
                 Constant.noImage,
-                height: MediaQuery.of(context).size.width * 0.25,
-                width: MediaQuery.of(context).size.width * 0.25,
+                height: MediaQuery.of(context).size.width * 0.225,
+                width: MediaQuery.of(context).size.width * 0.225,
               );
             }
           ),
@@ -43,7 +43,7 @@ class ShopItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.75,
+                width: MediaQuery.of(context).size.width * 0.675,
                 child: Text(
                   categoryShop.name,
                   overflow: TextOverflow.ellipsis,
