@@ -13,7 +13,7 @@ class PostTileComment extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image(image: Assets.images.comment),
+        Icon(Icons.message_outlined, color: Colors.grey,),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.77,
             child: Text(

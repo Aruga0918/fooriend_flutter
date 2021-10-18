@@ -39,9 +39,18 @@ class RootScreen extends StatelessWidget {
             tabBar: CupertinoTabBar(
               backgroundColor: Colors.white,
               items: [
-                BottomNavigationBarItem(icon: BarIcon(path: 'assets/images/home.png')),
-                BottomNavigationBarItem(icon: BarIcon(path: 'assets/images/search.png')),
-                BottomNavigationBarItem(icon: BarIcon(path: 'assets/images/user.png')),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  activeIcon: Icon(Icons.home, color: Colors.deepOrange)
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search_outlined),
+                  activeIcon: Icon(Icons.search, color: Colors.deepOrange)
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person_outline),
+                  activeIcon: Icon(Icons.person, color: Colors.deepOrange)
+                ),
               ],
             ),
           );

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:fooriend/components/log_out_button.dart';
+import 'package:fooriend/components/post_editor.dart';
+import 'package:fooriend/components/sigin_in_button.dart';
 import 'package:fooriend/models/entities/community.dart';
 import 'package:fooriend/models/entities/user_community.dart';
 import 'package:fooriend/models/stores/home_store.dart';
+import 'package:fooriend/models/stores/user_store.dart';
 import 'package:fooriend/utils/mock_constant.dart';
 import 'package:fooriend/widgets/screens/home/children/community_circle.dart';
 import 'package:fooriend/widgets/screens/home/children/display_bar.dart';
@@ -19,11 +23,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StateNotifierProvider<HomeScreenController, HomeScreenState>(
-      create: (_) => HomeScreenController(context: context, homeStore: HomeStore()),
+      create: (_) => HomeScreenController(context: context, homeStore: HomeStore(), userStore: UserStore()),
       builder: (context, _) {
         final selectedName = context.select<HomeScreenState, String>((state) => state.selectedCommunityName);
         final selectedCommunityIconUrl = context.select<HomeScreenState, String>((state) => state.selectedCommunityIconUrl);
         final belongCommunities = context.select<HomeScreenState, List<UserCommunity>>((state) => state.belongCommunities);
+        final isLogin = context.select<HomeScreenState, bool>((state) => state.isLogin);
         final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
         return Scaffold(
               key: _key,
@@ -48,6 +53,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                actions: [
+                  TextButton(
+                    child: Text("debug"),
+                    onPressed: () => context.read<HomeScreenController>().watch(),
+                  )
+                ],
               ),
               drawer: Drawer(
                 child: Container(
@@ -56,14 +67,20 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(8,50,0,0),
-                        child: Text(
-                          "コミュニティ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 26,
-                              color: Colors.white
-                          ),
+                        padding: const EdgeInsets.fromLTRB(8,50,8,0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "コミュニティ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 26,
+                                  color: Colors.white
+                              ),
+                            ),
+                            isLogin ? LogOutButton(logOut: () => context.read<HomeScreenController>().logOut()) : SignInButton(),
+                          ],
                         ),
                       ),
                       CommunityBar(userCommunity: belongCommunities),
@@ -71,6 +88,16 @@ class HomeScreen extends StatelessWidget {
                   )
                 ),
               ),
+              floatingActionButton: isLogin
+                ? FloatingActionButton(
+                    backgroundColor: Colors.deepOrange,
+                    child: Icon(Icons.add_outlined),
+                    onPressed: () {Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PostEditor())
+                    );},
+                  )
+                : null,
               body: Column(
                 children: [
                   DisplayBar(selectedName: selectedName),

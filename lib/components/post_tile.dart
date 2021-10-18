@@ -8,6 +8,7 @@ import 'package:fooriend/widgets/screens/home/children/post_comment.dart';
 import 'package:fooriend/widgets/screens/home/children/post_menulist.dart';
 import 'package:fooriend/widgets/screens/home/children/user_icon.dart';
 import 'package:fooriend/widgets/screens/home/children/user_names.dart';
+import 'package:fooriend/widgets/screens/shop/shop_screen.dart';
 
 
 class PostTile extends StatelessWidget {
@@ -21,6 +22,7 @@ class PostTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -35,17 +37,40 @@ class PostTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PostTileUserNames(userName: post.userName, uid: post.uid),
-                  PostTileShopName(shopName: post.shopName),
+                  InkWell(
+                    child: PostTileShopName(shopName: post.shopName),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ShopScreen(shopId: post.shopId))
+                      );
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: PostTileComment(comment: post.message),
                   ),
-                  PostTileMenuList(menu: post.menu),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0)
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.menu_book_rounded, color: Colors.grey),
+                        PostTileMenuList(menu: post.menu),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
-          Text("投稿された時間", style: TextStyle(color: Colors.grey),)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0,8.0,8.0,0),
+            child: Text(post.createdAt, style: TextStyle(color: Colors.grey),),
+          )
         ],
       ),
       decoration: BoxDecoration(

@@ -6,6 +6,7 @@ import 'package:fooriend/models/entities/user_community.dart';
 import 'package:fooriend/models/repositories/community_repository.dart';
 import 'package:fooriend/models/repositories/user_repository.dart';
 import 'package:fooriend/models/stores/home_store.dart';
+import 'package:fooriend/models/stores/user_store.dart';
 import 'package:fooriend/utils/mock_constant.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -26,9 +27,11 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
   HomeScreenController({
     required this.context,
     required this.homeStore,
+    required this.userStore
   }) : super(const HomeScreenState());
   final BuildContext context;
   final HomeStore homeStore;
+  final UserStore userStore;
   final userRepository = UserRepository(
       dio: AppDio.defaults()
   );
@@ -36,9 +39,18 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
   @override
   void initState() async{
     super.initState();
+    userStore.isLogin.listen(
+            (value) {
+              if (value) {
+                state = state.copyWith(isLogin: true);
+                _loadUserData();
+              }
+            });
     // homeStore.setCommunities(Community.mockCommunities.map((data) => Community.toJson(community: data)).toList());
-    _loadCommunities();
-    _loadSelectCommunity();
+    // if (userStore.isLogin.value) {
+    //   state = state.copyWith(isLogin: true);
+    //   _loadUserData();
+    // }
   }
 
   @override
@@ -49,6 +61,11 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
   _fromJson(jsonData) {
     final data = jsonDecode(jsonData);
     return data;
+  }
+
+  void watch() {
+    print(userStore.isLogin.value);
+    print("state: ${state.isLogin}");
   }
 
   _loadCommunities() async{
@@ -72,7 +89,29 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
     }
   }
 
+  _loadUserData() async{
+    final userCommunities = await userRepository.getUserCommunities();
+    homeStore.selectedCommunity.listen((value) async{
+      if (value != "") {
+        final communityData = await Community.fromJson(value);
+        state = state.copyWith(
+            selectedCommunityName: communityData.name,
+            selectedCommunityIconUrl: communityData.commIconUrl,
+        );
+      } else{
+        state = state.copyWith(
+            belongCommunities: userCommunities,
+            isLogin: true
+        );
+      }
+    });
+  }
+
   void selectCommunity(String communityName) {
     state = state.copyWith(selectedCommunityName: communityName);
+  }
+
+  void logOut() {
+    userStore.logOut();
   }
 }

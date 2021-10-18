@@ -21,6 +21,7 @@ class SearchResultScreen extends StatelessWidget {
     return StateNotifierProvider<SearchResultScreenController, SearchResultScreenState>(
       create: (_) => SearchResultScreenController(id: id),
       builder: (context, _){
+        final paddingSize = MediaQuery.of(context).size.width * 0.05;
         final isLoaded = context.select<SearchResultScreenState, bool>((state) => state.isLoaded);
         final shopList = context.select<SearchResultScreenState, List<CategoryShop>>((state) => state.categoryShops);
         return Scaffold(
@@ -30,14 +31,21 @@ class SearchResultScreen extends StatelessWidget {
             shrinkWrap: true,
             itemCount: shopList.length,
             itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                child: ShopItem(categoryShop: shopList[index]),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ShopScreen(categoryShop: shopList[index]))
-                  );
-                },
+              return Container(
+                padding: EdgeInsets.fromLTRB(paddingSize,0,paddingSize,paddingSize),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(paddingSize),
+                  color: Colors.white,
+                ),
+                child: InkWell(
+                  child: ShopItem(categoryShop: shopList[index]),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ShopScreen(shopId: shopList[index].id))
+                    );
+                  },
+                ),
               );
             },
           )

@@ -11,8 +11,14 @@ class PostTileShopName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset("assets/images/shop_icon.png"),
-        Text(shopName),
+        Icon(Icons.restaurant, color: Colors.grey),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.77,
+          child: Text(
+            shopName,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }

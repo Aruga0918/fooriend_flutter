@@ -20,10 +20,13 @@ class PostTileUserNames extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          uid,
-          style: TextStyle(
-            color: Colors.grey,
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(
+            '@ $uid',
+            style: TextStyle(
+              color: Colors.grey,
+            ),
           ),
         ),
       ],

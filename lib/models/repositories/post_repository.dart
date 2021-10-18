@@ -2,12 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/api/app_dio.dart';
 import 'package:fooriend/models/entities/post.dart';
+import 'package:fooriend/models/repositories/refresh_repository.dart';
+import 'package:fooriend/models/stores/user_store.dart';
+import 'package:fixnum/fixnum.dart';
+
 
 class PostRepository {
   final Dio dio;
 
   const PostRepository({required this.dio});
+
 
   Future<Post> getPost({required String postId}) async{
     final response = await dio.get('/posts/$postId');
@@ -127,14 +133,27 @@ class PostRepository {
   Future<void> createPost({
     required int userId,
     required int shopId,
-    required List<dynamic> menu,
+    required List<int> menu,
     required String message,
   }) async{
-     await dio.post(
-        '/posts/users/$userId/shops/$shopId', queryParameters: {
-          'menu': menu,
+     final response = await dio.post(
+        '/posts/users/$userId/shops/$shopId', data: {
+          'menus': menu,
           'message': message,
-    });
+    },);
+     print(response);
+     if (response.statusCode == 401) {
+       final refreshRepository = RefreshRepository(
+           dio: AppDio.defaults(),
+           userStore: UserStore()
+       );
+       refreshRepository.refresh();
+       final newResponse = await dio.post(
+           '/posts/users/$userId/shops/$shopId', data: {
+         'menus': menu,
+         'message': message,
+       });
+     }
   }
 
   Future<void> editPost({
