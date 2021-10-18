@@ -103,7 +103,7 @@ class PostEditorController extends StateNotifier<PostEditorState> with LocatorMi
     final Map<String, dynamic> params = {
       "user_id": userId,
       "shop_id": state.selectedShop.id,
-      "menus": state.selectedMenus.map((menu) => Int64(menu!.id)).toList(),
+      "menus": state.selectedMenus.map((menu) => menu!.id).toList(),
       "message": commentEditingController.text
     };
     postRepository.createPost(

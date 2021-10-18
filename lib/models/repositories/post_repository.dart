@@ -133,14 +133,15 @@ class PostRepository {
   Future<void> createPost({
     required int userId,
     required int shopId,
-    required List<Int64> menu,
+    required List<int> menu,
     required String message,
   }) async{
      final response = await dio.post(
-        '/posts/users/$userId/shops/$shopId', queryParameters: {
+        '/posts/users/$userId/shops/$shopId', data: {
           'menus': menu,
           'message': message,
     },);
+     print(response);
      if (response.statusCode == 401) {
        final refreshRepository = RefreshRepository(
            dio: AppDio.defaults(),
@@ -148,7 +149,7 @@ class PostRepository {
        );
        refreshRepository.refresh();
        final newResponse = await dio.post(
-           '/posts/users/$userId/shops/$shopId', queryParameters: {
+           '/posts/users/$userId/shops/$shopId', data: {
          'menus': menu,
          'message': message,
        });
