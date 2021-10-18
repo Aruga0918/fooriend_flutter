@@ -22,6 +22,7 @@ class Shop {
     required this.address,
     required this.menu,
   });
+
   static fromJson(dataList) {
     final data = dataList.data;
     final shop = Shop(

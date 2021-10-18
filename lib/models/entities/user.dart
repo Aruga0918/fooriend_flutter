@@ -22,7 +22,7 @@ class User {
         name: data["name"],
         uid: data["uid"],
         userId: data["id"],
-        profile: data["profile"],
+        profile: data["profile"]==null ? "" : data["profile"],
     );
     return user;
   }

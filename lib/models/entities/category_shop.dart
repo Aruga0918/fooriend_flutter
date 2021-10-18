@@ -12,7 +12,7 @@ class CategoryShop {
   final String description;
   final String address;
 
-  CategoryShop({
+  const CategoryShop({
     required this.id,
     required this.name,
     required this.iconUrl,
@@ -22,6 +22,8 @@ class CategoryShop {
     required this.description,
     required this.address,
   });
+
+  static const CategoryShop mock = CategoryShop(id: 0, name: "店を選択してください", iconUrl: "", postedCount: 0, latitude: 0.0, longitude: 0.0, description: "", address: "");
   static fromJson(data) {
     final categoryShop = CategoryShop(
         id: data["id"],

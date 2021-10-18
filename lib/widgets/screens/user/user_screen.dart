@@ -20,18 +20,31 @@ class UserScreen extends StatelessWidget {
         create: (_) => UserScreenController(userStore: UserStore()),
         builder: (context, _) {
           final isLogIn = context.select<UserScreenState, bool>((state) => state.isLogin);
+          final userName = context.select<UserScreenState, String>((state) => state.username);
+          final userId = context.select<UserScreenState, int>((state) => state.userId);
+          final uid = context.select<UserScreenState, String>((state) => state.uid);
+          final userIconUrl = context.select<UserScreenState, String>((state) => state.userIcon);
+          final profile = context.select<UserScreenState, String>((state) => state.profile);
+
           return Scaffold(
             appBar: AppBar(
               title: isLogIn
                 ? Text("ようこそ")
                 : Text("ログイン"),
-              actions: [LogOutButton(logOut: () => context.read<UserScreenController>().logOut())],
+              actions: isLogIn
+              ? [LogOutButton(logOut: () => context.read<UserScreenController>().logOut())]
+              : [],
             ),
             body: Container(
                child: !isLogIn
                  ? SignInScreen()
                  : StickyTabScreen(
-                  tabHeader: [UserScreenUpper()],
+                  tabHeader: [UserScreenUpper(
+                    userName: userName,
+                    uid: uid,
+                    userIconUrl: userIconUrl,
+                    profile: profile,
+                  )],
                   tabBar: TabBar(
                    isScrollable: true,
                    labelColor: Colors.black,
@@ -43,7 +56,7 @@ class UserScreen extends StatelessWidget {
                  ),
                  tabBarView: TabBarView(
                    children: [
-                     UserPosts(userId: 1)
+                     UserPosts(userId: userId)
                    ],
                  ),
                ),

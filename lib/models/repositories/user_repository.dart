@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/token.dart';
+import 'package:fooriend/models/entities/user.dart';
 import 'package:fooriend/models/entities/user_community.dart';
+import 'package:fooriend/models/repositories/refresh_repository.dart';
+import 'package:fooriend/models/stores/user_store.dart';
 
 class UserRepository {
   final Dio dio;
@@ -24,10 +29,18 @@ class UserRepository {
 //     ...
 // ]
 
-  Future<String> getUserData({required int userId}) async{
+  Future<User> getUserData({required int userId}) async{
     final response = await dio.get('/users/$userId');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    if (response.statusCode == 401) {
+      final refreshRepository = RefreshRepository(
+          dio: dio,
+          userStore: UserStore()
+        );
+      refreshRepository.refresh();
+      final newResponse = await dio.get('/users/$userId');
+      return User.fromJson(newResponse.data);
+    }
+    return User.fromJson(response.data);
   }
   //{
 //     "name" : ユーザーの名前,
@@ -53,9 +66,18 @@ class UserRepository {
   }
 
   Future<List<UserCommunity>> getUserCommunities() async{
-    final response = await dio.get('/users/communities');
+    final userStore = UserStore();
+    final response = await dio.get(
+        '/users/communities', options: new Options(
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer ${Token.fromJson(json.decode(userStore.tokenData.value)).accessToken}'
+      }
+    )
+    );
     final List<UserCommunity> communityList = [];
-    response.data.forEach((data) => communityList.add(UserCommunity.fromJson(data)));
+    if (response.data.isNotEmpty) {
+      response.data.forEach((data) => communityList.add(UserCommunity.fromJson(data)));
+    }
     return communityList;
     //[
     //     {

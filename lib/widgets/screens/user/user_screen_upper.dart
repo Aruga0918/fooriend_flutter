@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 
 class UserScreenUpper extends StatelessWidget {
-  const UserScreenUpper({Key? key}) : super(key: key);
+  const UserScreenUpper({
+    Key? key,
+    required this.userName,
+    required this.uid,
+    required this.userIconUrl,
+    required this.profile,
+  }) : super(key: key);
+  final String userName;
+  final String uid;
+  final String userIconUrl;
+  final String profile;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                foregroundImage: AssetImage("assets/images/user_sample.jpg"),
+                foregroundImage: NetworkImage(userIconUrl),
                 radius: 40,
               ),
             ),
@@ -21,14 +31,14 @@ class UserScreenUpper extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "ユーザー名",
+                  userName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20
                   ),
                 ),
                 Text(
-                  "@"
+                  uid
                 )
               ],
             )
@@ -37,7 +47,7 @@ class UserScreenUpper extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.1,
           child: Text(
-            "プロフィール"
+            profile
           ),
         )
       ],

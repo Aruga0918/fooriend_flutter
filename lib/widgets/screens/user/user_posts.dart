@@ -18,7 +18,7 @@ class UserPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StateNotifierProvider<UserPostsController, UserPostsState>(
-        create: (_) => UserPostsController(userId: 1),
+        create: (_) => UserPostsController(userId: userId),
         builder: (context, _) {
           final isLoaded = context.select<UserPostsState, bool>((state) => state.isLoaded);
           final postList = context.select<UserPostsState, List<Post>>((state) => state.postList);

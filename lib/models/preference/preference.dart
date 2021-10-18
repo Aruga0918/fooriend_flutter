@@ -16,6 +16,8 @@ enum PreferenceKey {
   userName,
   //uid
   uid,
+  //ログイン状態
+  isLogin,
   //ユーザー所属コミュニティリスト
   communityList,
   //選択表示されているコミュニティ

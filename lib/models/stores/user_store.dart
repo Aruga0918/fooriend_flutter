@@ -1,5 +1,3 @@
-
-
 import 'package:fooriend/models/entities/token.dart';
 import 'package:fooriend/models/entities/user.dart';
 import 'package:rxdart/rxdart.dart';
@@ -17,6 +15,7 @@ class UserStore {
   // final uid = BehaviorSubject<String>.seeded("");
   final userData = BehaviorSubject<String>.seeded("");
   final tokenData = BehaviorSubject<String>.seeded("");
+  final isLogin = BehaviorSubject<bool>.seeded(false);
   late Preference preference;
 
   void inject(Preference preference) {
@@ -35,9 +34,19 @@ class UserStore {
     await preference.setString(key: PreferenceKey.accessToken, value: token.accessToken);
     await preference.setString(key: PreferenceKey.refreshToken, value: token.refreshToken);
     await preference.setString(key: PreferenceKey.tokenData, value: Token.toJson(token: token));
+    await preference.setBool(PreferenceKey.isLogin, true);
+    isLogin.sink.add(true);
     _loadToken();
   }
 
+  void refreshToken({
+  required String accessToken, required Token beforeToken
+  }) async{
+    final newToken = Token.refresh(accessToken: accessToken, beforeToken: beforeToken);
+    await preference.setString(key: PreferenceKey.accessToken, value: accessToken);
+    await preference.setString(key: PreferenceKey.tokenData, value: Token.toJson(token: newToken));
+    _loadToken();
+  }
 
   //TODO: どこかでユーザーが所属しているコミュニティ情報をとってくる関数を作成
 
@@ -58,5 +67,7 @@ class UserStore {
     tokenData.sink.add("");
     await preference.clearString(key: PreferenceKey.userData);
     userData.sink.add("");
+    await preference.setBool(PreferenceKey.isLogin, false);
+    isLogin.sink.add(false);
   }
 }

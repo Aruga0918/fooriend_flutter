@@ -55,6 +55,7 @@ class SignInScreenController extends StateNotifier<SignInScreenState> with Locat
   void logIn({required String uid, required String passWord}) async{
     final tokenData = await signRepository.signing(uid: uid, password: passWord);
     userStore.setToken(token: tokenData);
+
   }
 
   void signUp({required String uid, required String passWord, required String userName}) async{
