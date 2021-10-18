@@ -8,6 +8,7 @@ import 'package:fooriend/widgets/screens/home/children/post_comment.dart';
 import 'package:fooriend/widgets/screens/home/children/post_menulist.dart';
 import 'package:fooriend/widgets/screens/home/children/user_icon.dart';
 import 'package:fooriend/widgets/screens/home/children/user_names.dart';
+import 'package:fooriend/widgets/screens/shop/shop_screen.dart';
 
 
 class PostTile extends StatelessWidget {
@@ -35,7 +36,15 @@ class PostTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PostTileUserNames(userName: post.userName, uid: post.uid),
-                  PostTileShopName(shopName: post.shopName),
+                  InkWell(
+                    child: PostTileShopName(shopName: post.shopName),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ShopScreen(shopId: post.shopId))
+                      );
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: PostTileComment(comment: post.message),
@@ -45,7 +54,7 @@ class PostTile extends StatelessWidget {
               ),
             ],
           ),
-          Text("投稿された時間", style: TextStyle(color: Colors.grey),)
+          Text(post.createdAt, style: TextStyle(color: Colors.grey),)
         ],
       ),
       decoration: BoxDecoration(

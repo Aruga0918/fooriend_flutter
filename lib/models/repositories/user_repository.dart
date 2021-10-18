@@ -78,6 +78,7 @@ class UserRepository {
     if (response.data.isNotEmpty) {
       response.data.forEach((data) => communityList.add(UserCommunity.fromJson(data)));
     }
+    print(response);
     return communityList;
     //[
     //     {

@@ -11,7 +11,7 @@ class PostTileShopName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset("assets/images/shop_icon.png"),
+        Icon(Icons.restaurant, color: Colors.grey),
         Text(shopName),
       ],
     );

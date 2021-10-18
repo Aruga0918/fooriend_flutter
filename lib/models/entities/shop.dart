@@ -12,7 +12,7 @@ class Shop {
   final String address;
   final List<dynamic> menu;
 
-  Shop({
+  const Shop({
     required this.id,
     required this.name,
     required this.iconUrl,
@@ -22,6 +22,8 @@ class Shop {
     required this.address,
     required this.menu,
   });
+
+  static const mock = Shop(id: 0, name: "mock", iconUrl: "", latitude: 0.0, longitude: 0.0, description: "", address: "", menu: []);
 
   static fromJson(dataList) {
     final data = dataList.data;

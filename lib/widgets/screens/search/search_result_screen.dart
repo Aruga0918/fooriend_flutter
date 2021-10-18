@@ -35,7 +35,7 @@ class SearchResultScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ShopScreen(categoryShop: shopList[index]))
+                      MaterialPageRoute(builder: (context) => ShopScreen(shopId: shopList[index].id))
                   );
                 },
               );

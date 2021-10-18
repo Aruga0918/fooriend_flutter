@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fooriend/gen/assets.gen.dart';
 import 'package:fooriend/models/entities/category_shop.dart';
+import 'package:fooriend/models/entities/shop.dart';
 
 class ShopScreenUpper extends StatelessWidget {
   const ShopScreenUpper({
     Key? key,
     required this.shopData
   }) : super(key: key);
-  final CategoryShop shopData;
+  final Shop shopData;
 
   @override
   Widget build(BuildContext context) {

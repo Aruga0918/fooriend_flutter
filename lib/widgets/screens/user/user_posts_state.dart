@@ -26,7 +26,7 @@ class UserPostsController extends StateNotifier<UserPostsState> with LocatorMixi
   @override
   void initState() async{
     super.initState();
-    final list = await postRepository.getUserPost(userId: 15);
+    final list = await postRepository.getUserPost(userId: userId);
     state = state.copyWith(
         postList: list,
         isLoaded: true
