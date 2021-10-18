@@ -12,7 +12,13 @@ class PostTileShopName extends StatelessWidget {
     return Row(
       children: [
         Icon(Icons.restaurant, color: Colors.grey),
-        Text(shopName),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.77,
+          child: Text(
+            shopName,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }

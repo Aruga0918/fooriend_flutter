@@ -20,10 +20,12 @@ class ShopScreenUpper extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.network(
-                  shopData.iconUrl,
+                SizedBox(
                   height: MediaQuery.of(context).size.width * 0.3,
                   width: MediaQuery.of(context).size.width * 0.3,
+                  child: Image.network(
+                    shopData.iconUrl,
+                  ),
                 ),
                 Container(
                   alignment: Alignment.center,

@@ -16,7 +16,7 @@ class PostTileMenuData extends StatelessWidget {
       children: [
         Text("・"),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.65,
+          width: MediaQuery.of(context).size.width * 0.68,
             child: Text(
                 menuName,
               overflow: TextOverflow.ellipsis,

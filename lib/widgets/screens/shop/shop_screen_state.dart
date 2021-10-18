@@ -15,6 +15,7 @@ part 'shop_screen_state.freezed.dart';
 class ShopScreenState with _$ShopScreenState  {
   const factory ShopScreenState({
     @Default(Shop.mock) Shop shopData,
+    @Default(false) bool isLoaded
   }) = _ShopScreenState;
 }
 
@@ -28,7 +29,10 @@ class ShopScreenController extends StateNotifier<ShopScreenState> with LocatorMi
   void initState() async{
     super.initState();
     final shop = await shopRepository.getShopData(shopId: shopId);
-    state = state.copyWith(shopData: shop);
+    state = state.copyWith(
+      shopData: shop,
+      isLoaded: true
+    );
   }
 
   @override

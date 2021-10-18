@@ -16,9 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ShopScreenStateTearOff {
   const _$ShopScreenStateTearOff();
 
-  _ShopScreenState call({Shop shopData = Shop.mock}) {
+  _ShopScreenState call({Shop shopData = Shop.mock, bool isLoaded = false}) {
     return _ShopScreenState(
       shopData: shopData,
+      isLoaded: isLoaded,
     );
   }
 }
@@ -29,6 +30,7 @@ const $ShopScreenState = _$ShopScreenStateTearOff();
 /// @nodoc
 mixin _$ShopScreenState {
   Shop get shopData => throw _privateConstructorUsedError;
+  bool get isLoaded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShopScreenStateCopyWith<ShopScreenState> get copyWith =>
@@ -40,7 +42,7 @@ abstract class $ShopScreenStateCopyWith<$Res> {
   factory $ShopScreenStateCopyWith(
           ShopScreenState value, $Res Function(ShopScreenState) then) =
       _$ShopScreenStateCopyWithImpl<$Res>;
-  $Res call({Shop shopData});
+  $Res call({Shop shopData, bool isLoaded});
 }
 
 /// @nodoc
@@ -55,12 +57,17 @@ class _$ShopScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? shopData = freezed,
+    Object? isLoaded = freezed,
   }) {
     return _then(_value.copyWith(
       shopData: shopData == freezed
           ? _value.shopData
           : shopData // ignore: cast_nullable_to_non_nullable
               as Shop,
+      isLoaded: isLoaded == freezed
+          ? _value.isLoaded
+          : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -72,7 +79,7 @@ abstract class _$ShopScreenStateCopyWith<$Res>
           _ShopScreenState value, $Res Function(_ShopScreenState) then) =
       __$ShopScreenStateCopyWithImpl<$Res>;
   @override
-  $Res call({Shop shopData});
+  $Res call({Shop shopData, bool isLoaded});
 }
 
 /// @nodoc
@@ -89,12 +96,17 @@ class __$ShopScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? shopData = freezed,
+    Object? isLoaded = freezed,
   }) {
     return _then(_ShopScreenState(
       shopData: shopData == freezed
           ? _value.shopData
           : shopData // ignore: cast_nullable_to_non_nullable
               as Shop,
+      isLoaded: isLoaded == freezed
+          ? _value.isLoaded
+          : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -102,15 +114,18 @@ class __$ShopScreenStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ShopScreenState implements _ShopScreenState {
-  const _$_ShopScreenState({this.shopData = Shop.mock});
+  const _$_ShopScreenState({this.shopData = Shop.mock, this.isLoaded = false});
 
   @JsonKey(defaultValue: Shop.mock)
   @override
   final Shop shopData;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isLoaded;
 
   @override
   String toString() {
-    return 'ShopScreenState(shopData: $shopData)';
+    return 'ShopScreenState(shopData: $shopData, isLoaded: $isLoaded)';
   }
 
   @override
@@ -119,12 +134,17 @@ class _$_ShopScreenState implements _ShopScreenState {
         (other is _ShopScreenState &&
             (identical(other.shopData, shopData) ||
                 const DeepCollectionEquality()
-                    .equals(other.shopData, shopData)));
+                    .equals(other.shopData, shopData)) &&
+            (identical(other.isLoaded, isLoaded) ||
+                const DeepCollectionEquality()
+                    .equals(other.isLoaded, isLoaded)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(shopData);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(shopData) ^
+      const DeepCollectionEquality().hash(isLoaded);
 
   @JsonKey(ignore: true)
   @override
@@ -133,10 +153,13 @@ class _$_ShopScreenState implements _ShopScreenState {
 }
 
 abstract class _ShopScreenState implements ShopScreenState {
-  const factory _ShopScreenState({Shop shopData}) = _$_ShopScreenState;
+  const factory _ShopScreenState({Shop shopData, bool isLoaded}) =
+      _$_ShopScreenState;
 
   @override
   Shop get shopData => throw _privateConstructorUsedError;
+  @override
+  bool get isLoaded => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ShopScreenStateCopyWith<_ShopScreenState> get copyWith =>
