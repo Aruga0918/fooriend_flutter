@@ -22,7 +22,8 @@ class SignInScreen extends StatelessWidget {
         final _userIdController = context.read<SignInScreenController>().userIdController;
         final _passwordController = context.read<SignInScreenController>().passwordController;
         final _isSingUp = context.select<SignInScreenState, bool>((state) => state.isSignUp);
-          return Scaffold(
+        final _isSingFailed = context.select<SignInScreenState, bool>((state) => state.isSignFailed);
+        return Scaffold(
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +74,13 @@ class SignInScreen extends StatelessWidget {
                                     .visible(),
                               )
                           ),
+                        ),
+                        _isSingFailed
+                        ? Text(
+                            "失敗しました。",
+                            style: TextStyle(color: Colors.red),
                         )
+                        : Text(""),
                       ],
                     ),
                   ),

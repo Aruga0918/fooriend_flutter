@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:fooriend/components/post_tile.dart';
 import 'package:fooriend/models/entities/post.dart';
+import 'package:fooriend/models/stores/user_store.dart';
 import 'package:fooriend/widgets/screens/shop/tabs/post_tab_state.dart';
 import 'package:fooriend/widgets/screens/user/user_posts_state.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,10 @@ class UserPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StateNotifierProvider<UserPostsController, UserPostsState>(
-        create: (_) => UserPostsController(userId: userId),
+        create: (_) => UserPostsController(
+            userId: userId,
+          userStore: UserStore()
+        ),
         builder: (context, _) {
           final isLoaded = context.select<UserPostsState, bool>((state) => state.isLoaded);
           final postList = context.select<UserPostsState, List<Post>>((state) => state.postList);

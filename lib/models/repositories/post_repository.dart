@@ -44,6 +44,7 @@ class PostRepository {
     final response = await dio.get('/posts/users/$userId');
     final List<Post> postList = [];
     response.data.forEach((data) => postList.add(Post.fromJson(data)));
+    print(userId);
     return postList;
   }
   //[

@@ -21,7 +21,7 @@ class HomeTimeLineController extends StateNotifier<HomeTimeLineState> with Locat
   @override
   void initState() async{
     if (mounted) {
-      await postRepository.getCommunityPost(communityId: 0).then(
+      await postRepository.getCommunityPost(communityId: communityId).then(
               (list) => state = state.copyWith(
                   postList: list,
                 isLoaded: true

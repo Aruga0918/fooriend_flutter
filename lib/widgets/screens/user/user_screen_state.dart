@@ -54,7 +54,8 @@ class UserScreenController extends StateNotifier<UserScreenState> with LocatorMi
           username: userData.name,
           uid: userData.uid,
           userIcon: userData.iconUrl,
-          profile: userData.profile
+          profile: userData.profile,
+          userId: userData.userId
         );
       } else {
         state = state.copyWith(isLogin: false);
@@ -62,7 +63,21 @@ class UserScreenController extends StateNotifier<UserScreenState> with LocatorMi
     });
   }
 
+
+  Future<void> refresh() async{
+    final tokenData = Token.fromJson(json.decode(userStore.tokenData.value));
+    final userData = await userRepository.getUserData(userId: tokenData.userId);
+    state  = state.copyWith(
+        isLogin: true,
+        username: userData.name,
+        uid: userData.uid,
+        userIcon: userData.iconUrl,
+        profile: userData.profile
+    );
+  }
+
   void logOut() {
     userStore.logOut();
+    dispose();
   }
 }

@@ -11,6 +11,7 @@ class StickyTabScreen extends StatelessWidget {
   /* タブバー         */ final TabBar tabBar;
   /* タブボディー      */ final TabBarView tabBarView;
   /* スクロール       */ final bool pinned;
+                        final Future<void> onRefresh;
 
   // コンストラクタ
   StickyTabScreen({
@@ -18,6 +19,7 @@ class StickyTabScreen extends StatelessWidget {
     required this.tabHeader,
     required this.tabBar,
     required this.tabBarView,
+    required this.onRefresh,
     this.pinned = true}
       ) : assert(tabHeader != null),
         assert(tabBar != null),
@@ -29,23 +31,26 @@ class StickyTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabBarView.children.length,
-      child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverList(
-                delegate: SliverChildListDelegate(
-                    tabHeader
+      child: RefreshIndicator(
+        onRefresh: () => onRefresh,
+        child: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                      tabHeader
+                  ),
                 ),
-              ),
-              SliverPersistentHeader(
-                pinned: pinned,
-                delegate: _StickyTabBarDelegate(
-                    tabBar
+                SliverPersistentHeader(
+                  pinned: pinned,
+                  delegate: _StickyTabBarDelegate(
+                      tabBar
+                  ),
                 ),
-              ),
-            ];
-          },
-          body: tabBarView
+              ];
+            },
+            body: tabBarView
+        ),
       ),
     );
   }

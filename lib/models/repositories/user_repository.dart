@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:fooriend/models/entities/rough_user.dart';
 import 'package:fooriend/models/entities/token.dart';
 import 'package:fooriend/models/entities/user.dart';
 import 'package:fooriend/models/entities/user_community.dart';
@@ -14,10 +15,12 @@ class UserRepository {
 
   const UserRepository({required this.dio});
 
-  Future<String> getUsers() async{
+  Future<List<RoughUser>> getUsers() async{
     final response = await dio.get('/users');
-    final json = jsonDecode(response.data);
-    return json.toString();
+    List<RoughUser> users = [];
+    response.data.forEach((data) => users.add(RoughUser.fromJson(data)));
+    print(users);
+    return users;
   }
   //[
 //     {
@@ -74,11 +77,12 @@ class UserRepository {
       }
     )
     );
-    final List<UserCommunity> communityList = [];
+    List<UserCommunity> communityList = [];
     if (response.data.isNotEmpty) {
       response.data.forEach((data) => communityList.add(UserCommunity.fromJson(data)));
     }
-    print(response);
+    print("below data is userCommunity");
+    print(response.data);
     return communityList;
     //[
     //     {

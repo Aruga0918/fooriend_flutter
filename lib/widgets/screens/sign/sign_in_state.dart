@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fooriend/models/api/app_dio.dart';
-import 'package:fooriend/models/entities/ranking.dart';
-import 'package:fooriend/models/repositories/ranking_repository.dart';
 import 'package:fooriend/models/repositories/sign_repository.dart';
 import 'package:fooriend/models/stores/user_store.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,6 +15,7 @@ class SignInScreenState with _$SignInScreenState  {
     @Default("") String uid,
     @Default(true) bool isObscure,
     @Default(false) bool isSignUp,
+    @Default(false) bool isSignFailed,
   }) = _SignInScreenState;
 }
 
@@ -53,14 +52,24 @@ class SignInScreenController extends StateNotifier<SignInScreenState> with Locat
   }
 
   void logIn({required String uid, required String passWord}) async{
-    final tokenData = await signRepository.signing(uid: uid, password: passWord);
-    userStore.setToken(token: tokenData);
+    try {
+      final tokenData = await signRepository.signing(uid: uid, password: passWord);
+      userStore.setToken(token: tokenData);
+      state = state.copyWith(isSignFailed: false);
 
+    } catch(e) {
+      state = state.copyWith(isSignFailed: true);
+    }
   }
 
   void signUp({required String uid, required String passWord, required String userName}) async{
-    final tokenData = await signRepository.signUp(userName: userName, uid: uid, password: passWord);
-    userStore.setToken(token: tokenData);
+    try {
+      final tokenData = await signRepository.signUp(userName: userName, uid: uid, password: passWord);
+      userStore.setToken(token: tokenData);
+      state = state.copyWith(isSignFailed: false);
+    } catch(e) {
+      state = state.copyWith(isSignFailed: true);
+    }
   }
 
   void logOut() {
