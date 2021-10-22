@@ -30,6 +30,7 @@ class ShopScreen extends StatelessWidget {
             ),
             body: isLoaded
             ? StickyTabScreen(
+                onRefresh: context.read<ShopScreenController>().mock(),
                 tabHeader: [ShopScreenUpper(shopData: shopData)],
                 tabBar: TabBar(
                   isScrollable: true,

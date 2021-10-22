@@ -39,6 +39,7 @@ class UserScreen extends StatelessWidget {
                child: !isLogIn
                  ? SignInScreen()
                  : StickyTabScreen(
+                  onRefresh: context.read<UserScreenController>().refresh(),
                   tabHeader: [UserScreenUpper(
                     userName: userName,
                     uid: uid,
@@ -46,14 +47,14 @@ class UserScreen extends StatelessWidget {
                     profile: profile,
                   )],
                   tabBar: TabBar(
-                   isScrollable: true,
-                   labelColor: Colors.black,
-                   unselectedLabelColor: Colors.grey,
-                   indicatorColor: Colors.deepOrange,
-                   tabs: [
-                     Tab(text: "投稿"),
-                   ],
-                 ),
+                    isScrollable: true,
+                    labelColor: Colors.black,
+                    unselectedLabelColor: Colors.grey,
+                    indicatorColor: Colors.deepOrange,
+                    tabs: [
+                      Tab(text: "投稿"),
+                    ],
+                  ),
                  tabBarView: TabBarView(
                    children: [
                      UserPosts(userId: userId)

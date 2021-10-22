@@ -27,6 +27,7 @@ class Token {
       uid: data["uid"],
       userId: data["id"],
     );
+    print('this user_id is ${user.userId}');
     return user;
   }
 

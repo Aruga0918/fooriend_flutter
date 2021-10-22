@@ -31,9 +31,10 @@ class HomeStore {
     await preference.setString(key: PreferenceKey.selectedCommunity, value: Constant.general);
   }
 
-  void selectCommunity(String nameAndUrl) async{
-    await preference.setString(key: PreferenceKey.selectedCommunity, value: nameAndUrl);
-    selectedCommunity.value = await preference.getString(PreferenceKey.selectedCommunity);
+  void selectCommunity(String community) async{
+    await preference.setString(key: PreferenceKey.selectedCommunity, value: community);
+    selectedCommunity.sink.add(community);
+    // selectedCommunity.value = await preference.getString(PreferenceKey.selectedCommunity);
   }
 
   void loadSelected() async{

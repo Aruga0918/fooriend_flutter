@@ -32,18 +32,18 @@ class CommunityRepository {
 //     "description" : コミュニティの説明,
 //     "host_user" : hostのuser id(unsigned int)
 
-  Future<String> createCommunity({
+  Future<int> createCommunity({
   required String communityName,
   required String description,
   required List<int> members  }) async {
     final response = await dio.post(
-        '/communities/create', queryParameters: {
+        '/communities/create', data: {
       'community_name': communityName,
       'description': description,
       'members': members,
     });
     //レスポンスオブジェクトはint
-    final communityId = jsonDecode(response.data).toString();
+    final communityId = response.data["id"];
     return communityId;
   }
 

@@ -18,6 +18,7 @@ class HomeScreenState with _$HomeScreenState {
   const factory HomeScreenState({
     @Default("パブリック") String selectedCommunityName,
     @Default(MockConstant.ACommunityImage) String selectedCommunityIconUrl,
+    @Default(0) int selectedCommunityId,
     @Default([]) List<UserCommunity> belongCommunities,
     @Default(false) bool isLogin,
   }) = _HomeScreenState;
@@ -39,18 +40,14 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
   @override
   void initState() async{
     super.initState();
-    userStore.isLogin.listen(
-            (value) {
-              if (value) {
-                state = state.copyWith(isLogin: true);
-                _loadUserData();
-              }
-            });
-    // homeStore.setCommunities(Community.mockCommunities.map((data) => Community.toJson(community: data)).toList());
-    // if (userStore.isLogin.value) {
-    //   state = state.copyWith(isLogin: true);
-    //   _loadUserData();
-    // }
+    userStore.isLogin.listen((value) {
+      if (value) {
+        state = state.copyWith(isLogin: true);
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+          _loadUserData();
+        });
+      }
+    });
   }
 
   @override
@@ -58,45 +55,24 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
     super.dispose();
   }
 
-  _fromJson(jsonData) {
-    final data = jsonDecode(jsonData);
-    return data;
-  }
-
   void watch() {
     print(userStore.isLogin.value);
     print("state: ${state.isLogin}");
-  }
-
-  _loadCommunities() async{
-    if (state.isLogin) {
-      final userCommunities = await userRepository.getUserCommunities();
-      state = state.copyWith(belongCommunities: userCommunities);
-    }
-  }
-
-  _loadSelectCommunity() {
-    if (state.isLogin) {
-      homeStore.selectedCommunity.listen((value) async{
-        if (value != "") {
-          final communityData = await Community.fromJson(value);
-          state = state.copyWith(
-              selectedCommunityName: communityData.name,
-              selectedCommunityIconUrl: communityData.commIconUrl
-          );
-        }
-      });
-    }
+    final communityRepository = CommunityRepository(dio: AppDio.defaults());
+    print(communityRepository.getCommunity(communityId: state.selectedCommunityId));
   }
 
   _loadUserData() async{
     final userCommunities = await userRepository.getUserCommunities();
+    userCommunities.insert(0, UserCommunity.public);
+    print(userCommunities);
     homeStore.selectedCommunity.listen((value) async{
-      if (value != "") {
-        final communityData = await Community.fromJson(value);
+      if (value.isNotEmpty) {
+        final communityData = UserCommunity.fromJson(json.decode(value));
         state = state.copyWith(
-            selectedCommunityName: communityData.name,
-            selectedCommunityIconUrl: communityData.commIconUrl,
+          selectedCommunityName: communityData.name,
+          selectedCommunityIconUrl: communityData.iconUrl,
+          selectedCommunityId: communityData.id,
         );
       } else{
         state = state.copyWith(
@@ -107,9 +83,6 @@ class HomeScreenController extends StateNotifier<HomeScreenState> with LocatorMi
     });
   }
 
-  void selectCommunity(String communityName) {
-    state = state.copyWith(selectedCommunityName: communityName);
-  }
 
   void logOut() {
     userStore.logOut();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:fooriend/components/community_editor.dart';
 import 'package:fooriend/components/log_out_button.dart';
 import 'package:fooriend/components/post_editor.dart';
 import 'package:fooriend/components/sigin_in_button.dart';
@@ -27,6 +28,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, _) {
         final selectedName = context.select<HomeScreenState, String>((state) => state.selectedCommunityName);
         final selectedCommunityIconUrl = context.select<HomeScreenState, String>((state) => state.selectedCommunityIconUrl);
+        final selectedCommunityId = context.select<HomeScreenState, int>((state) => state.selectedCommunityId);
         final belongCommunities = context.select<HomeScreenState, List<UserCommunity>>((state) => state.belongCommunities);
         final isLogin = context.select<HomeScreenState, bool>((state) => state.isLogin);
         final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -84,6 +86,24 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       CommunityBar(userCommunity: belongCommunities),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: InkWell(
+                          onTap: () {Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CommunityEditor())
+                          );},
+                          child: Row(
+                            children: [
+                              Icon(Icons.add_circle_outline, color: Colors.white),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("コミュニティ作成"),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   )
                 ),
@@ -101,7 +121,7 @@ class HomeScreen extends StatelessWidget {
               body: Column(
                 children: [
                   DisplayBar(selectedName: selectedName),
-                  Expanded(child: HomeTimeLine(communityId: 0,))
+                  Expanded(child: HomeTimeLine(communityId: selectedCommunityId))
                 ],
               ),
             );

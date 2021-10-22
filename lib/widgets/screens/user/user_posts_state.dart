@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fooriend/models/api/app_dio.dart';
 import 'package:fooriend/models/entities/post.dart';
 import 'package:fooriend/models/entities/ranking.dart';
+import 'package:fooriend/models/entities/token.dart';
 import 'package:fooriend/models/repositories/post_repository.dart';
 import 'package:fooriend/models/repositories/ranking_repository.dart';
+import 'package:fooriend/models/stores/user_store.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -18,19 +22,31 @@ class UserPostsState with _$UserPostsState  {
 }
 
 class UserPostsController extends StateNotifier<UserPostsState> with LocatorMixin {
-  UserPostsController({required this.userId}) : super(const UserPostsState());
+  UserPostsController({
+    required this.userId,
+    required this.userStore
+  }) : super(const UserPostsState());
   final int userId;
   late final postRepository = PostRepository(
     dio: AppDio.defaults(),
   );
+  final UserStore userStore;
+
   @override
   void initState() async{
     super.initState();
-    final list = await postRepository.getUserPost(userId: userId);
-    state = state.copyWith(
-        postList: list,
-        isLoaded: true
-    );
+    _load();
+  }
+
+  void _load() {
+    userStore.tokenData.listen((value) async{
+        final tokenData = Token.fromJson(json.decode(value));
+        final list = await postRepository.getUserPost(userId: tokenData.userId);
+        state = state.copyWith(
+            postList: list,
+            isLoaded: true
+        );
+    });
   }
 
   @override

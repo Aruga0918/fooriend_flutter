@@ -69,8 +69,7 @@ class Community {
     ),
   ];
 
-  static Community fromJson(jsonData) {
-    final data = json.decode(jsonData);
+  static Community fromJson(data) {
     final community = Community(
       id: int.parse(data["id"]),
       members: data["members"],

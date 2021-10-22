@@ -21,13 +21,15 @@ class _$SignInScreenStateTearOff {
       int userId = 0,
       String uid = "",
       bool isObscure = true,
-      bool isSignUp = false}) {
+      bool isSignUp = false,
+      bool isSignFailed = false}) {
     return _SignInScreenState(
       userName: userName,
       userId: userId,
       uid: uid,
       isObscure: isObscure,
       isSignUp: isSignUp,
+      isSignFailed: isSignFailed,
     );
   }
 }
@@ -42,6 +44,7 @@ mixin _$SignInScreenState {
   String get uid => throw _privateConstructorUsedError;
   bool get isObscure => throw _privateConstructorUsedError;
   bool get isSignUp => throw _privateConstructorUsedError;
+  bool get isSignFailed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInScreenStateCopyWith<SignInScreenState> get copyWith =>
@@ -54,7 +57,12 @@ abstract class $SignInScreenStateCopyWith<$Res> {
           SignInScreenState value, $Res Function(SignInScreenState) then) =
       _$SignInScreenStateCopyWithImpl<$Res>;
   $Res call(
-      {String userName, int userId, String uid, bool isObscure, bool isSignUp});
+      {String userName,
+      int userId,
+      String uid,
+      bool isObscure,
+      bool isSignUp,
+      bool isSignFailed});
 }
 
 /// @nodoc
@@ -73,6 +81,7 @@ class _$SignInScreenStateCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? isObscure = freezed,
     Object? isSignUp = freezed,
+    Object? isSignFailed = freezed,
   }) {
     return _then(_value.copyWith(
       userName: userName == freezed
@@ -95,6 +104,10 @@ class _$SignInScreenStateCopyWithImpl<$Res>
           ? _value.isSignUp
           : isSignUp // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSignFailed: isSignFailed == freezed
+          ? _value.isSignFailed
+          : isSignFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -107,7 +120,12 @@ abstract class _$SignInScreenStateCopyWith<$Res>
       __$SignInScreenStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String userName, int userId, String uid, bool isObscure, bool isSignUp});
+      {String userName,
+      int userId,
+      String uid,
+      bool isObscure,
+      bool isSignUp,
+      bool isSignFailed});
 }
 
 /// @nodoc
@@ -128,6 +146,7 @@ class __$SignInScreenStateCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? isObscure = freezed,
     Object? isSignUp = freezed,
+    Object? isSignFailed = freezed,
   }) {
     return _then(_SignInScreenState(
       userName: userName == freezed
@@ -150,6 +169,10 @@ class __$SignInScreenStateCopyWithImpl<$Res>
           ? _value.isSignUp
           : isSignUp // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSignFailed: isSignFailed == freezed
+          ? _value.isSignFailed
+          : isSignFailed // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -162,7 +185,8 @@ class _$_SignInScreenState implements _SignInScreenState {
       this.userId = 0,
       this.uid = "",
       this.isObscure = true,
-      this.isSignUp = false});
+      this.isSignUp = false,
+      this.isSignFailed = false});
 
   @JsonKey(defaultValue: "")
   @override
@@ -179,10 +203,13 @@ class _$_SignInScreenState implements _SignInScreenState {
   @JsonKey(defaultValue: false)
   @override
   final bool isSignUp;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isSignFailed;
 
   @override
   String toString() {
-    return 'SignInScreenState(userName: $userName, userId: $userId, uid: $uid, isObscure: $isObscure, isSignUp: $isSignUp)';
+    return 'SignInScreenState(userName: $userName, userId: $userId, uid: $uid, isObscure: $isObscure, isSignUp: $isSignUp, isSignFailed: $isSignFailed)';
   }
 
   @override
@@ -201,7 +228,10 @@ class _$_SignInScreenState implements _SignInScreenState {
                     .equals(other.isObscure, isObscure)) &&
             (identical(other.isSignUp, isSignUp) ||
                 const DeepCollectionEquality()
-                    .equals(other.isSignUp, isSignUp)));
+                    .equals(other.isSignUp, isSignUp)) &&
+            (identical(other.isSignFailed, isSignFailed) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSignFailed, isSignFailed)));
   }
 
   @override
@@ -211,7 +241,8 @@ class _$_SignInScreenState implements _SignInScreenState {
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(uid) ^
       const DeepCollectionEquality().hash(isObscure) ^
-      const DeepCollectionEquality().hash(isSignUp);
+      const DeepCollectionEquality().hash(isSignUp) ^
+      const DeepCollectionEquality().hash(isSignFailed);
 
   @JsonKey(ignore: true)
   @override
@@ -225,7 +256,8 @@ abstract class _SignInScreenState implements SignInScreenState {
       int userId,
       String uid,
       bool isObscure,
-      bool isSignUp}) = _$_SignInScreenState;
+      bool isSignUp,
+      bool isSignFailed}) = _$_SignInScreenState;
 
   @override
   String get userName => throw _privateConstructorUsedError;
@@ -237,6 +269,8 @@ abstract class _SignInScreenState implements SignInScreenState {
   bool get isObscure => throw _privateConstructorUsedError;
   @override
   bool get isSignUp => throw _privateConstructorUsedError;
+  @override
+  bool get isSignFailed => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SignInScreenStateCopyWith<_SignInScreenState> get copyWith =>

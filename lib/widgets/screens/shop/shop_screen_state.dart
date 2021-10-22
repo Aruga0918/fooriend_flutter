@@ -35,6 +35,18 @@ class ShopScreenController extends StateNotifier<ShopScreenState> with LocatorMi
     );
   }
 
+  Future<void> refresh() async{
+    final shop = await shopRepository.getShopData(shopId: shopId);
+    state = state.copyWith(
+        shopData: shop,
+        isLoaded: true
+    );
+  }
+
+  Future<void> mock() async{
+
+  }
+
   @override
   void dispose() {
     super.dispose();
