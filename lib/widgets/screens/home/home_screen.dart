@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 actions: [
                   TextButton(
-                    child: Text("debug"),
+                    child: Text(""),
                     onPressed: () => context.read<HomeScreenController>().watch(),
                   )
                 ],
@@ -86,8 +86,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       CommunityBar(userCommunity: belongCommunities),
-                      Align(
-                        alignment: Alignment.bottomLeft,
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {Navigator.push(
                               context,
@@ -98,7 +99,13 @@ class HomeScreen extends StatelessWidget {
                               Icon(Icons.add_circle_outline, color: Colors.white),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("コミュニティ作成"),
+                                child: Text(
+                                  "コミュニティ作成",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
                               )
                             ],
                           ),
@@ -111,7 +118,7 @@ class HomeScreen extends StatelessWidget {
               floatingActionButton: isLogin
                 ? FloatingActionButton(
                     backgroundColor: Colors.deepOrange,
-                    child: Icon(Icons.add_outlined),
+                    child: Icon(Icons.brush_outlined),
                     onPressed: () {Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => PostEditor())

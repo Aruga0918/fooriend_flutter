@@ -28,7 +28,11 @@ class SignInScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(image: Assets.images.brandlogo),
+                Image(
+                    image: Assets.images.blandTitle,
+                  // height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                ),
                 Container(
                   height: _isSingUp
                     ? MediaQuery.of(context).size.height * 0.3

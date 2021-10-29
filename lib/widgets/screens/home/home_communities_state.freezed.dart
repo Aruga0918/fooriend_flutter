@@ -20,11 +20,13 @@ class _$HomeCommunitiesStateTearOff {
       {String selectedCommunityName = "",
       String selectedCommunityIconUrl = "",
       List<UserCommunity> belongingCommunities = const [],
+      List<bool> isJoinedList = const [],
       bool isLogin = false}) {
     return _HomeCommunitiesState(
       selectedCommunityName: selectedCommunityName,
       selectedCommunityIconUrl: selectedCommunityIconUrl,
       belongingCommunities: belongingCommunities,
+      isJoinedList: isJoinedList,
       isLogin: isLogin,
     );
   }
@@ -39,6 +41,7 @@ mixin _$HomeCommunitiesState {
   String get selectedCommunityIconUrl => throw _privateConstructorUsedError;
   List<UserCommunity> get belongingCommunities =>
       throw _privateConstructorUsedError;
+  List<bool> get isJoinedList => throw _privateConstructorUsedError;
   bool get isLogin => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -55,6 +58,7 @@ abstract class $HomeCommunitiesStateCopyWith<$Res> {
       {String selectedCommunityName,
       String selectedCommunityIconUrl,
       List<UserCommunity> belongingCommunities,
+      List<bool> isJoinedList,
       bool isLogin});
 }
 
@@ -72,6 +76,7 @@ class _$HomeCommunitiesStateCopyWithImpl<$Res>
     Object? selectedCommunityName = freezed,
     Object? selectedCommunityIconUrl = freezed,
     Object? belongingCommunities = freezed,
+    Object? isJoinedList = freezed,
     Object? isLogin = freezed,
   }) {
     return _then(_value.copyWith(
@@ -87,6 +92,10 @@ class _$HomeCommunitiesStateCopyWithImpl<$Res>
           ? _value.belongingCommunities
           : belongingCommunities // ignore: cast_nullable_to_non_nullable
               as List<UserCommunity>,
+      isJoinedList: isJoinedList == freezed
+          ? _value.isJoinedList
+          : isJoinedList // ignore: cast_nullable_to_non_nullable
+              as List<bool>,
       isLogin: isLogin == freezed
           ? _value.isLogin
           : isLogin // ignore: cast_nullable_to_non_nullable
@@ -106,6 +115,7 @@ abstract class _$HomeCommunitiesStateCopyWith<$Res>
       {String selectedCommunityName,
       String selectedCommunityIconUrl,
       List<UserCommunity> belongingCommunities,
+      List<bool> isJoinedList,
       bool isLogin});
 }
 
@@ -125,6 +135,7 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
     Object? selectedCommunityName = freezed,
     Object? selectedCommunityIconUrl = freezed,
     Object? belongingCommunities = freezed,
+    Object? isJoinedList = freezed,
     Object? isLogin = freezed,
   }) {
     return _then(_HomeCommunitiesState(
@@ -140,6 +151,10 @@ class __$HomeCommunitiesStateCopyWithImpl<$Res>
           ? _value.belongingCommunities
           : belongingCommunities // ignore: cast_nullable_to_non_nullable
               as List<UserCommunity>,
+      isJoinedList: isJoinedList == freezed
+          ? _value.isJoinedList
+          : isJoinedList // ignore: cast_nullable_to_non_nullable
+              as List<bool>,
       isLogin: isLogin == freezed
           ? _value.isLogin
           : isLogin // ignore: cast_nullable_to_non_nullable
@@ -155,6 +170,7 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
       {this.selectedCommunityName = "",
       this.selectedCommunityIconUrl = "",
       this.belongingCommunities = const [],
+      this.isJoinedList = const [],
       this.isLogin = false});
 
   @JsonKey(defaultValue: "")
@@ -166,13 +182,16 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
   @JsonKey(defaultValue: const [])
   @override
   final List<UserCommunity> belongingCommunities;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<bool> isJoinedList;
   @JsonKey(defaultValue: false)
   @override
   final bool isLogin;
 
   @override
   String toString() {
-    return 'HomeCommunitiesState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl, belongingCommunities: $belongingCommunities, isLogin: $isLogin)';
+    return 'HomeCommunitiesState(selectedCommunityName: $selectedCommunityName, selectedCommunityIconUrl: $selectedCommunityIconUrl, belongingCommunities: $belongingCommunities, isJoinedList: $isJoinedList, isLogin: $isLogin)';
   }
 
   @override
@@ -190,6 +209,9 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
             (identical(other.belongingCommunities, belongingCommunities) ||
                 const DeepCollectionEquality().equals(
                     other.belongingCommunities, belongingCommunities)) &&
+            (identical(other.isJoinedList, isJoinedList) ||
+                const DeepCollectionEquality()
+                    .equals(other.isJoinedList, isJoinedList)) &&
             (identical(other.isLogin, isLogin) ||
                 const DeepCollectionEquality().equals(other.isLogin, isLogin)));
   }
@@ -200,6 +222,7 @@ class _$_HomeCommunitiesState implements _HomeCommunitiesState {
       const DeepCollectionEquality().hash(selectedCommunityName) ^
       const DeepCollectionEquality().hash(selectedCommunityIconUrl) ^
       const DeepCollectionEquality().hash(belongingCommunities) ^
+      const DeepCollectionEquality().hash(isJoinedList) ^
       const DeepCollectionEquality().hash(isLogin);
 
   @JsonKey(ignore: true)
@@ -214,6 +237,7 @@ abstract class _HomeCommunitiesState implements HomeCommunitiesState {
       {String selectedCommunityName,
       String selectedCommunityIconUrl,
       List<UserCommunity> belongingCommunities,
+      List<bool> isJoinedList,
       bool isLogin}) = _$_HomeCommunitiesState;
 
   @override
@@ -223,6 +247,8 @@ abstract class _HomeCommunitiesState implements HomeCommunitiesState {
   @override
   List<UserCommunity> get belongingCommunities =>
       throw _privateConstructorUsedError;
+  @override
+  List<bool> get isJoinedList => throw _privateConstructorUsedError;
   @override
   bool get isLogin => throw _privateConstructorUsedError;
   @override

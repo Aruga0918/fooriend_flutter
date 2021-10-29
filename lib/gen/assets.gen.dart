@@ -8,6 +8,8 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  AssetGenImage get blandTitle =>
+      const AssetGenImage('assets/images/bland_title.png');
   AssetGenImage get brandlogo =>
       const AssetGenImage('assets/images/brandlogo.png');
   AssetGenImage get cat => const AssetGenImage('assets/images/cat.jpg');
@@ -23,6 +25,8 @@ class $AssetsImagesGen {
   AssetGenImage get foodWes =>
       const AssetGenImage('assets/images/food_wes.png');
   AssetGenImage get home => const AssetGenImage('assets/images/home.png');
+  AssetGenImage get profileIcon =>
+      const AssetGenImage('assets/images/profile_icon.png');
   AssetGenImage get ranking1 =>
       const AssetGenImage('assets/images/ranking-1.png');
   AssetGenImage get ranking2 =>

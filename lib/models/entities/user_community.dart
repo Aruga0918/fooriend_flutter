@@ -6,15 +6,17 @@ class UserCommunity {
   final String name;
   final int memberCnt;
   final String iconUrl;
+  final bool isJoin;
 
   UserCommunity({
     required this.id,
     required this.name,
     required this.iconUrl,
-    required this.memberCnt
+    required this.memberCnt,
+    required this.isJoin
   });
 
-  static final public = UserCommunity(id: 0, name: "public", memberCnt: 10000000, iconUrl: MockConstant.ACommunityImage);
+  static final public = UserCommunity(id: 0, name: "public", memberCnt: 10000000, iconUrl: MockConstant.ACommunityImage, isJoin: true);
 
   static UserCommunity fromJson(data) {
     // final data = json.decode(jsonData);
@@ -23,6 +25,7 @@ class UserCommunity {
       name: data["name"],
       iconUrl: data["icon_url"] != null ? data["icon_url"] : MockConstant.ACommunityImage,
       memberCnt: data["member_cnt"],
+      isJoin: data["is_join"]
     );
     return userCommunity;
   }
@@ -32,7 +35,8 @@ class UserCommunity {
       "id": userCommunity.id,
       "name": userCommunity.name,
       "icon_url": userCommunity.iconUrl,
-      "member_cnt": userCommunity.memberCnt
+      "member_cnt": userCommunity.memberCnt,
+      "is_join": userCommunity.isJoin
     });
   }
 }

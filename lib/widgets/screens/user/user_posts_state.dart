@@ -49,6 +49,68 @@ class UserPostsController extends StateNotifier<UserPostsState> with LocatorMixi
     });
   }
 
+  Future<void> _delete({required Post post, required BuildContext context}) async {
+    showDialog(
+        context: context,
+        builder:(_) {
+          return AlertDialog(
+            title: Text("投稿削除"),
+            content: Text("この投稿を削除しますか？"),
+            actions: [
+              SimpleDialogOption(
+                child: Text("キャンセル"),
+                onPressed: () => Navigator.pop(_),
+              ),
+              SimpleDialogOption(
+                child: Text("削除"),
+                onPressed: () => postRepository.deletePost(postId: post.postId)
+              ),
+            ],
+          );
+        },
+    );
+  }
+
+  Future<void> _edit({required Post post, required BuildContext context}) async {
+    showDialog(
+      context: context,
+      builder:(_) {
+        return AlertDialog(
+          title: Text("投稿編集"),
+          content: Text("この投稿を編集しますか？"),
+          actions: [
+            SimpleDialogOption(
+              child: Text("キャンセル"),
+              onPressed: () => Navigator.pop(_),
+            ),
+            SimpleDialogOption(
+                child: Text("編集する"),
+                onPressed: () async{
+                  await postRepository.deletePost(postId: post.postId);
+                  Navigator.pop(_);
+                }
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void popUpAction({required Post post, required String action, required BuildContext context}) async{
+    if (action == "編集") {
+      await _edit(post: post, context: context);
+    }
+    if (action == "削除") {
+      await _delete(post: post, context: context);
+      final tokenData = Token.fromJson(json.decode(userStore.tokenData.value));
+      final list = await postRepository.getUserPost(userId: tokenData.userId);
+      state = state.copyWith(
+          postList: list,
+          isLoaded: true
+      );
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();

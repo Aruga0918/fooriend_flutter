@@ -14,6 +14,7 @@ class UserPosts extends StatelessWidget {
     required this.userId
   }) : super(key: key);
   final int userId;
+  static const _popUpLists = ["編集", "削除"];
 
 
   @override
@@ -31,7 +32,30 @@ class UserPosts extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: postList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return PostTile(post: postList[index]);
+                  return Stack(
+                      children: [
+                        PostTile(post: postList[index]),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: PopupMenuButton(
+                                onSelected: (String action) => context
+                                    .read<UserPostsController>()
+                                    .popUpAction(post: postList[index], action: action, context: context),
+                                itemBuilder: (BuildContext context) {
+                                  return _popUpLists.map(
+                                          (action) => PopupMenuItem(
+                                              child: Text(action),
+                                              value: action,
+                                          )
+                                  ).toList();
+                                }
+                            ),
+                          ),
+                        )
+                  ]
+                  );
                 },
               )
               : Container(

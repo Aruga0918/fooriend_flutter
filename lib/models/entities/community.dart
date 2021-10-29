@@ -71,11 +71,11 @@ class Community {
 
   static Community fromJson(data) {
     final community = Community(
-      id: int.parse(data["id"]),
+      id: data["id"],
       members: data["members"],
       name: data["name"],
-      commIconUrl: data["comm_icon_url"],
-      hostUser: int.parse(data["host_user"]),
+      commIconUrl: data["comm_icon_url"] != null ? data["comm_icon_url"] : MockConstant.BCommunityImage,
+      hostUser: data["host_user"],
       description: data["description"],
     );
     return community;

@@ -12,7 +12,7 @@ class CommunityRepository {
 
   Future<Community> getCommunity({required int communityId}) async {
     final response = await dio.get('/communities/$communityId');
-    return Community.fromJson(response);
+    return Community.fromJson(response.data);
   }
 
 //NOTE

@@ -170,6 +170,6 @@ class PostRepository {
   }
 
   Future<void> deletePost({required int postId}) async{
-    await dio.delete('/posts/communities/$postId');
+    await dio.delete('/posts/$postId');
   }
 }
